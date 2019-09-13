@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"rt.h": "c"
+		"rt.h": "c",
+		"float.h": "c",
+		"intrin.h": "c"
 	}
 }

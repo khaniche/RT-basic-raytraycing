@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
+#    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/13 11:57:24 by khaniche         ###   ########.fr        #
+#    Updated: 2019/09/13 14:45:44 by dmolyboh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,8 @@ HEADERS = 		$(INC_DIR)canvas.h \
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
 
-CC = gcc -g -flto -Ofast -pipe
-CFLAGS = -Wall -Werror -Wextra
+CC = gcc -g 
+CFLAGS = -Wall -Werror -Wextra -flto -Ofast -pipe
 INC = 	-I $(INC_DIR) \
 		-I libft \
 		-I libparson \

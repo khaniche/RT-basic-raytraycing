@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cylinder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 20:16:47 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/12 18:24:19 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/13 14:47:43 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,20 @@ void			rt_intersect_ray_cylinder(t_ray ray, t_objects *cyl,
 				dot(ray.direction, cyl->orient) * dot(oc, cyl->orient));
 	coeff[2] = dot(oc, oc) - pow(dot(oc, cyl->orient), 2) - cyl->radius;
 	discriminant = coeff.y * coeff.y - 4 * coeff.x * coeff.z;
-	if (discriminant >= 0)
+		if (discriminant >= 0)
 	{
 		roots[0] = (-coeff.y + sqrt(discriminant)) / (2 * coeff.x);
 		roots[1] = (-coeff.y - sqrt(discriminant)) / (2 * coeff.x);
 		curr_t = rt_select_dist(roots, dist_range);
 		if (curr_t < inter->dist)
 		{
-			inter->dist = curr_t;
-			inter->closest_obj = cyl;
+			t_vec hit = curr_t * ray.direction + oc;
+			double len = dot(hit, cyl->orient);
+			if (len > 1 && len < 4)
+			{
+				inter->dist = curr_t;
+				inter->closest_obj = cyl;
+			}
 		}
 	}
 }

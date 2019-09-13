@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/12 21:04:54 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/13 14:49:07 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 {
 	t_channel	local_color;
 	t_channel	reflected_color;
+	t_channel 	transparency_color;
 	t_intersect	inter;
 	double		i;
 
@@ -67,12 +68,15 @@ t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 	local_color = rt_enlightenment(inter.closest_obj->color, i);
 	if (depth <= 0 || inter.closest_obj->reflection <= 0)
 		return (local_color);
+	ray.origin = inter.hit;
+	transparency_color = rt_trace_ray(ray, rt,
+		(double[2]) {0.001, DBL_MAX}, depth - 1);
 	ray.direction = rt_reflect_ray(inter.normal, -ray.direction);
 	ray.origin = inter.hit;
 	reflected_color = rt_trace_ray(ray, rt,
 		(double[2]) {0.001, DBL_MAX}, depth - 1);
 	return (rt_calc_reflected_color(local_color, reflected_color,
-		inter.closest_obj->reflection));
+		inter.closest_obj->reflection, transparency_color));
 }
 
 void		*rt_threaded_loop(void *r)

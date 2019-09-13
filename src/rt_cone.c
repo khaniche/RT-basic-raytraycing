@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cone.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:53:54 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/12 19:04:28 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/13 15:22:22 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void			rt_intersect_ray_cone(t_ray ray, t_objects *cone,
 		curr_t = rt_select_dist(roots, dist_range);
 		if (curr_t < inter->dist)
 		{
-			inter->dist = curr_t;
-			inter->closest_obj = cone;
+		inter->dist = roots[0];
+				inter->closest_obj = cone;
+			
 		}
 	}
 }
