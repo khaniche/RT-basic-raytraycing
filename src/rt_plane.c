@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_plane.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 17:52:26 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/12 17:03:56 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/13 20:04:17 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	rt_intersect_ray_plane(t_ray ray, t_objects *plane,
 	denominator = dot(plane->orient, ray.direction);
 	if (denominator != 0)
 	{
-		oc = (plane->orient - plane->centre);
+		oc = ray.origin - plane->centre;
 		t = -dot(oc, plane->orient) / denominator;
 		if (t > dist_range[0] && t < dist_range[1] && t < inter->dist)
 		{

@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 16:18:33 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 20:00:29 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ bool	pr_obj_cyl(const JSON_Object *j_ob, t_objects *cyl)
 		!pr_specular(j_ob, cyl) ||
 		!pr_radius(j_ob, cyl) ||
 		!pr_reflection(j_ob, cyl) ||
-		!pr_transparency(j_ob, cyl)
-		!pr_cut())
+		!pr_transparency(j_ob, cyl))
 		return (false);
 	pr_cut(cyl);
 	cyl->orient /= vec_length(cyl->orient);

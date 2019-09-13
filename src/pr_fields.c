@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:08 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 16:18:30 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 20:00:00 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ bool	pr_transparency(const JSON_Object *j_ob, t_objects *obj)
 	return (true);
 }
 
-bool	pr_cut(t_objects *obj)
+void	pr_cut(t_objects *obj)
 {
 	obj->cut[2] = 0;
 	if ((!obj->cut[1] && !obj->cut[0])
