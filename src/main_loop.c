@@ -3,14 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:22:55 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 11:16:24 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/12 21:04:28 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void	ft_event(t_sdls *app)
+{
+	SDL_Event	event;
+
+	while (SDL_PollEvent(&event))
+	{
+		if ((SDL_QUIT == event.type) || (SDL_KEYDOWN == event.type &&
+			SDL_SCANCODE_ESCAPE == event.key.keysym.scancode))
+			app->flags.running = false;
+		if (SDL_KEYDOWN == event.type && event.key.keysym.sym == SDLK_UP)
+		{
+			app->flags.rot_x = true;
+		}
+		if (SDL_KEYDOWN == event.type && event.key.keysym.sym == SDLK_LEFT)
+			app->flags.rot_y = true;
+	}
+}
+
+void	ft_update(t_sdls *app, t_rt *rt)
+{
+	if (app->flags.rot_x)
+	{
+		rt->camera.orient[0] += ROT_POWER;
+		app->flags.rot_x = false;
+		app->flags.state_changed = 1;
+	}
+	if (app->flags.rot_y)
+	{
+		rt->camera.orient[1] += ROT_POWER;
+		app->flags.rot_y = false;
+		app->flags.state_changed = 1;
+	}
+	cn_update(&(app->canvas));
+}
 
 void	ft_render(t_sdls *app)
 {

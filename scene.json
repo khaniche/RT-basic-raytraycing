@@ -7,14 +7,14 @@
 		"radius": 0.6,
 		"angle": 45,
 		"reflection": -1,
-		"specular": 100
+		"specular": 1
 	} ,{
 		"type": "sphere",
-		"centre": [3.0, 1.0, 5.0],
+		"centre": [-2, 2, 5.0],
 		"orient": [0.0, 0.0, 0.0],
 		"color": [255, 0, 0],
 		"specular": 500.0,
-		"reflection": 0.2,
+		"reflection": 1,
 		"radius": 1.5
 	}],
 	"lights": [{
