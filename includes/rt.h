@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 09:37:35 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 11:58:22 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define DIST_CAM_PP 1
 # define RECURTION_DEPTH 3
 # define DEG_TO_RAD(angle) (M_PI * angle) / 180
-# define ROT_POWER DEG_TO_RAD(15);
+# define ROT_POWER DEG_TO_RAD(1);
 
 typedef double			t_vec __attribute__((__ext_vector_type__(3)));
 
@@ -111,7 +111,14 @@ typedef struct			s_flags
 	bool				state_changed;
 	bool				rot_x;
 	bool				rot_y;
+	bool				rot_x_min;
+	bool				rot_y_min;
 	bool				rot_z;
+	bool				rot_z_min;
+	bool				forward;
+	bool				backward;
+	bool				right;
+	bool				left;
 }						t_flags;
 
 typedef struct			s_sdls
@@ -149,7 +156,7 @@ t_vec					rt_canvas_to_viewport(int x, int y);
 double					rt_compute_lighting(t_objects *objs,
 							t_lights *lights, t_ray ray, t_intersect *inter);
 t_channel				rt_calc_reflected_color(t_channel local_color,
-							t_channel reflected_color, double r, t_channel trancperency_color);
+							t_channel reflected_color, double r);
 t_vec					rt_reflect_ray(t_vec normal, t_vec ray_dir);
 t_vec					rt_calc_normal(t_intersect *inter, t_ray ray);
 double					vec_length(t_vec v);
@@ -181,8 +188,9 @@ bool					pr_specular(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_reflection(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_radius(const JSON_Object *j_ob, t_objects *obj);
 
-t_vec					rt_rotate_camera(t_camera *camera, t_vec ray_dir);
 void					*rt_threaded_loop(void *r);
 void					rt_thread_tracer(t_rt *rt);
-
+t_vec					rt_rotate_camera(t_camera *camera, t_vec ray_dir);
+void					ft_event(t_sdls *app);
+void					ft_update(t_sdls *app, t_rt *rt);
 #endif

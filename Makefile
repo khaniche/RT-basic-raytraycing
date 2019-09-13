@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+         #
+#    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/12 21:03:08 by mhonchar         ###   ########.fr        #
+#    Updated: 2019/09/13 11:57:24 by khaniche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ SRC_FILES =		main.c \
 				pr_fields2.c \
 				pr_lights.c \
 				pr_objs.c \
-				rt_threader.c
+				rt_threader.c\
+				key_hooks.c
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \
