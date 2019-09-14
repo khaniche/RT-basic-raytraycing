@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:08 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 21:58:40 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 18:07:55 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ bool	pr_channel_color(const JSON_Object *j_ob, t_objects *obj)
 	else if (obj->color.b > 255)
 		obj->color.b = 255;
 	return (true);
+	free(j_arr);
 }
 
 /*

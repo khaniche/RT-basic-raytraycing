@@ -6,7 +6,7 @@
 #    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/14 15:39:57 by khaniche         ###   ########.fr        #
+#    Updated: 2019/09/14 20:32:01 by khaniche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SRC_FILES =		main.c \
 				pr_objs.c \
 				rt_threader.c\
 				key_hooks.c\
-				matrix_ratation
+				matrix_rotation.c
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \
@@ -61,7 +61,7 @@ HEADERS = 		$(INC_DIR)canvas.h \
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
 
-CC = gcc -g 
+CC = gcc -g
 CFLAGS = -Wall -Werror -Wextra -flto -Ofast -pipe
 INC = 	-I $(INC_DIR) \
 		-I libft \

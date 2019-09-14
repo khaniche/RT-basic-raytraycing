@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 15:40:58 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 20:35:28 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct			s_sdls
 {
 	t_canvas			canvas;
 	t_flags				flags;
+	SDL_Event			event;
 }						t_sdls;
 
 void					ft_sdl_init(t_sdls *app);
@@ -190,8 +191,10 @@ bool					pr_channel_color(const JSON_Object *j_ob, t_objects *o);
 bool					pr_specular(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_reflection(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_radius(const JSON_Object *j_ob, t_objects *obj);
-bool					pr_transparency(const JSON_Object *j_ob, t_objects *obj);
+bool					pr_transparency(const JSON_Object *j_ob,
+						t_objects *obj);
 void					pr_cut(t_objects *obj);
+void					check_light(t_lights **lg);
 
 void					*rt_threaded_loop(void *r);
 void					rt_thread_tracer(t_rt *rt);
@@ -199,5 +202,7 @@ t_vec					rt_rotate_camera(t_camera *camera, t_vec ray_dir);
 void					ft_event(t_sdls *app);
 void					ft_update(t_sdls *app, t_rt *rt);
 t_vec					moves(t_vec vec_rot, t_vec orient);
+void					ft_event_(t_sdls *app);
+bool					false_error(char *str);
 
 #endif

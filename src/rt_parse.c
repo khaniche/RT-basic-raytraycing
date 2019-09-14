@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:46:34 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/12 13:30:44 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/14 20:37:39 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ bool	parse_array_of_scene_objects(const JSON_Array *j_arr, t_objects **objs)
 		}
 	}
 	obj->next = NULL;
+	json_object_clear(j_ob);
 	return (true);
 }
 
@@ -67,6 +68,7 @@ bool	parse_array_of_lights(const JSON_Array *j_arr, t_lights **lights)
 		}
 	}
 	light->next = NULL;
+	json_object_clear(j_ob);
 	return (true);
 }
 
@@ -89,6 +91,7 @@ bool	pr_camera(const JSON_Object *j_ob, t_camera *camera)
 	camera->orient[0] = DEG_TO_RAD(camera->orient[0]);
 	camera->orient[1] = DEG_TO_RAD(camera->orient[1]);
 	camera->orient[2] = DEG_TO_RAD(camera->orient[2]);
+	json_object_clear(j_cam);
 	return (true);
 }
 
@@ -97,50 +100,32 @@ bool	rt_parse_file_(t_rt *rt, JSON_Object *json_objs)
 	JSON_Array	*json_arr;
 
 	if ((json_arr = json_object_get_array(json_objs, "objects")) == NULL)
-	{
-		ft_putstr("Error while getting array of scene objects\n");
-		return (false);
-	}
+		false_error("Error while getting array of scene objects");
 	if (!parse_array_of_scene_objects(json_arr, &(rt->objs)))
-	{
-		ft_putstr("Error while parsing objects");
-		return (false);
-	}
+		false_error("Error while parsing objects");
 	if ((json_arr = json_object_get_array(json_objs, "lights")) == NULL)
-	{
-		ft_putstr("Error while getting array of lights\n");
-		return (false);
-	}
+		false_error("Error while getting array of lights");
 	if (!parse_array_of_lights(json_arr, &(rt->lights)))
-	{
-		ft_putstr("Error while parsing lights\n");
-		return (false);
-	}
+		false_error("Error while parsing lights");
+	json_array_clear(json_arr);
 	return (true);
 }
 
 bool	rt_parse_file(t_rt *rt, const char *fname)
 {
 	JSON_Value	*json_val;
-	JSON_Object *json_objs;
+	JSON_Object	*json_objs;
 
 	if ((json_val = json_parse_file(fname)) == NULL)
-	{
-		ft_putstr("Error while parsing json\n");
-		return (false);
-	}
+		false_error("Error while parsing json");
 	if ((json_objs = json_value_get_object(json_val)) == NULL)
-	{
-		ft_putstr("Error while getting object from value\n");
-		return (false);
-	}
+		false_error("Error while getting object from value");
 	if (!rt_parse_file_(rt, json_objs))
 		return (false);
 	if (!(pr_camera(json_objs, &(rt->camera))))
-	{
-		ft_putstr("Error while parsing camera");
-		return (false);
-	}
-	ft_putstr("All good so far\n");
+		false_error("Error while parsing camera");
+	ft_putendl("All good so far");
+	json_object_clear(json_objs);
+	json_value_free(json_val);
 	return (true);
 }

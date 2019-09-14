@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 15:21:23 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/12 21:05:33 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/14 20:43:02 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,10 @@ void		rt_mainloop(t_rt *rt, Uint32 *pixels)
 				rt_channel_color_to_uint(color));
 		}
 	}
+}
+
+bool		false_error(char *str)
+{
+	ft_putendl(str);
+	return (false);
 }

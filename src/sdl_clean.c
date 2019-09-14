@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:51:23 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 13:18:13 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 20:38:44 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@ void	ft_sdl_clean(t_sdls *app)
 
 	cn_destroy_canvas(&(app->canvas));
 	rt_clean(&rt);
-	system("leaks -q RTv1");
 	SDL_Quit();
 }

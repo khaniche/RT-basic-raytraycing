@@ -4,7 +4,7 @@
 		"centre": [0, 0, 5],
 		"orient": [0, 1, 1],
 		"color": [56, 212, 120],
-		"radius": 10,
+		"radius": 0.6,
 		"angle": 45,
 		"reflection": -1,
 		"specular": 100,
@@ -25,7 +25,7 @@
 	}  ],
 	"lights": [{
 		"type": "ambient",
-		"intensity": 0.3
+		"intensity": 0.1
 	}, {
 		"type": "point",
 		"position": [2, 2, -5],
