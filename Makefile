@@ -6,7 +6,7 @@
 #    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/13 21:24:12 by khaniche         ###   ########.fr        #
+#    Updated: 2019/09/14 15:39:57 by khaniche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ SRC_FILES =		main.c \
 				pr_lights.c \
 				pr_objs.c \
 				rt_threader.c\
-				key_hooks.c
+				key_hooks.c\
+				matrix_ratation
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \

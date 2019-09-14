@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 14:40:46 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 15:40:58 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,5 +198,6 @@ void					rt_thread_tracer(t_rt *rt);
 t_vec					rt_rotate_camera(t_camera *camera, t_vec ray_dir);
 void					ft_event(t_sdls *app);
 void					ft_update(t_sdls *app, t_rt *rt);
+t_vec					moves(t_vec vec_rot, t_vec orient);
 
 #endif
