@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 21:19:17 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 15:29:15 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	pr_obj_plane(const JSON_Object *j_ob, t_objects *plane)
 		!pr_vec_field(j_ob, "cut", &(plane->cut)) ||
 		!pr_channel_color(j_ob, plane) ||
 		!pr_specular(j_ob, plane) ||
+		!pr_radius(j_ob, plane) ||
 		!pr_reflection(j_ob, plane) ||
 		!pr_transparency(j_ob, plane))
 		return (false);

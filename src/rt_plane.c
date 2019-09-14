@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 17:52:26 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 21:49:42 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 15:28:40 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	rt_intersect_ray_plane(t_ray ray, t_objects *plane,
 		{
 			t = -dot(oc, plane->orient) / dot(ray.direction, plane->orient);
 			hitpoint = t * ray.direction + oc;
-			if (vec_length(hitpoint) < 5)
+			if (vec_length(hitpoint) < plane->radius)
 			{
 				inter->dist = t;
 				inter->closest_obj = plane;

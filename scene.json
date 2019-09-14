@@ -1,14 +1,14 @@
 {
 	"objects": [{
-		"type": "cylinder",
+		"type": "plane",
 		"centre": [0, 0, 5],
 		"orient": [0, 1, 1],
 		"color": [56, 212, 120],
-		"radius": 0.6,
+		"radius": 10,
 		"angle": 45,
 		"reflection": -1,
 		"specular": 100,
-		"cut": [1, 4, 0],
+		"cut": [0, 1, 0],
 		"transparency" : 0.0
 	},
 	{

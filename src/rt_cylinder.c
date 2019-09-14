@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 20:16:47 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 15:19:15 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 15:27:12 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		cut_cylinder(t_intersect *inter, double *data, t_objects *cyl,
 	{
 		hit = data[2] * ray.direction + oc;
 		data[1] = dot(hit, cyl->orient);
-		if (data[1] > 0 && data[1] < 4)
+		if (data[1] > cyl->cut[0] && data[1] < cyl->cut[1])
 		{
 			inter->dist = data[2];
 			inter->closest_obj = cyl;
