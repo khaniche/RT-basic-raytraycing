@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
+#    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/13 14:45:44 by dmolyboh         ###   ########.fr        #
+#    Updated: 2019/09/13 21:24:12 by khaniche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_FILES =		main.c \
 				rt_rotation.c \
 				pr_fields.c \
 				pr_fields2.c \
+				pr_fields3.c \
 				pr_lights.c \
 				pr_objs.c \
 				rt_threader.c\

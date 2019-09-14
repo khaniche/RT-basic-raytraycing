@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 14:41:45 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/14 14:40:46 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "SDL2_image/SDL_image.h"
 
 # define THREADS_AMOUNT 6
+# define M_P 3.14159265358979323846
 # define CW CN_WIDTH
 # define CH CN_HEIGHT
 # define VIEWPORT_WIDTH 1

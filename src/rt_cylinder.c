@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cylinder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 20:16:47 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 14:47:43 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/14 15:19:15 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,45 @@ t_vec			rt_calc_cylinder_normal(t_intersect *i, t_ray ray)
 	return (normal / vec_length(normal));
 }
 
+static void		cut_cylinder(t_intersect *inter, double *data, t_objects *cyl,
+				t_ray ray)
+{
+	t_vec	oc;
+	t_vec	hit;
+
+	oc = ray.origin - cyl->centre;
+	if (data[2] < inter->dist)
+	{
+		hit = data[2] * ray.direction + oc;
+		data[1] = dot(hit, cyl->orient);
+		if (data[1] > 0 && data[1] < 4)
+		{
+			inter->dist = data[2];
+			inter->closest_obj = cyl;
+		}
+	}
+}
+
 void			rt_intersect_ray_cylinder(t_ray ray, t_objects *cyl,
 					t_intersect *inter, double *dist_range)
 {
 	double	roots[2];
 	t_vec	oc;
 	t_vec	coeff;
-	double	discriminant;
-	double	curr_t;
+	double	data[3];
 
 	oc = ray.origin - cyl->centre;
 	coeff[0] = dot(ray.direction, ray.direction) -
-				pow(dot(ray.direction, cyl->orient), 2);
+		pow(dot(ray.direction, cyl->orient), 2);
 	coeff[1] = 2 * (dot(ray.direction, oc) -
-				dot(ray.direction, cyl->orient) * dot(oc, cyl->orient));
+		dot(ray.direction, cyl->orient) * dot(oc, cyl->orient));
 	coeff[2] = dot(oc, oc) - pow(dot(oc, cyl->orient), 2) - cyl->radius;
-	discriminant = coeff.y * coeff.y - 4 * coeff.x * coeff.z;
-		if (discriminant >= 0)
+	data[0] = coeff.y * coeff.y - 4 * coeff.x * coeff.z;
+	if (data[0] >= 0)
 	{
-		roots[0] = (-coeff.y + sqrt(discriminant)) / (2 * coeff.x);
-		roots[1] = (-coeff.y - sqrt(discriminant)) / (2 * coeff.x);
-		curr_t = rt_select_dist(roots, dist_range);
-		if (curr_t < inter->dist)
-		{
-			t_vec hit = curr_t * ray.direction + oc;
-			double len = dot(hit, cyl->orient);
-			if (len > 1 && len < 4)
-			{
-				inter->dist = curr_t;
-				inter->closest_obj = cyl;
-			}
-		}
+		roots[0] = (-coeff.y + sqrt(data[0])) / (2 * coeff.x);
+		roots[1] = (-coeff.y - sqrt(data[0])) / (2 * coeff.x);
+		data[2] = rt_select_dist(roots, dist_range);
+		cut_cylinder(inter, data, cyl, ray);
 	}
 }

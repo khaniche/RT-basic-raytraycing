@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_fields.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:08 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 20:00:00 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 21:58:40 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,35 +104,6 @@ bool	pr_reflection(const JSON_Object *j_ob, t_objects *obj)
 	if (obj->reflection > 1)
 		return (false);
 	return (true);
-}
-
-bool	pr_transparency(const JSON_Object *j_ob, t_objects *obj)
-{
-	if (!json_object_has_value_of_type(j_ob, "transparency", JSONNumber))
-	{
-		obj->transparency = -1;
-		return (true);
-	}
-	obj->transparency = json_object_get_number(j_ob, "transparency");
-	if (obj->transparency > 1)
-		return (false);
-	return (true);
-}
-
-void	pr_cut(t_objects *obj)
-{
-	obj->cut[2] = 0;
-	if ((!obj->cut[1] && !obj->cut[0])
-		|| (obj->cut[0] > obj->cut[1]))
-	{
-		obj->cut[0] = -2147483648;
-		obj->cut[1] = 2147483647;
-	}	
-	else if (obj->cut[1] == obj->cut[0])
-	{
-		obj->cut[0] = -2147483648;
-		obj->cut[1] = 2147483647;
-	}
 }
 
 /*

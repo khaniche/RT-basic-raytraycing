@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_sphere.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 15:17:35 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 15:01:14 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 21:22:10 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ double			rt_select_dist(double *roots, double *dist_range)
 	double	best;
 
 	best = DBL_MAX;
-	
 	if (roots[0] > dist_range[0] && roots[0] < dist_range[1])
 		best = roots[0];
 	if (roots[1] > dist_range[0] && roots[1] < dist_range[1] && roots[1] < best)

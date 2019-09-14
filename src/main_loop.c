@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:22:55 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 12:00:30 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/14 13:30:27 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_mainloop(t_sdls *app)
 
 	if (rt_parse_file(&rt, "scene.json") == false)
 		return ;
-	rt.pixels = (Uint32 *)malloc(CW * CH * sizeof(Uint32));
+	rt.pixels = app->canvas.pixels;
 	while (app->flags.running)
 	{
 		ft_event(app);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_plane.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 17:52:26 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 20:49:03 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 21:49:42 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	rt_intersect_ray_plane(t_ray ray, t_objects *plane,
 	double	t;
 	double	denominator;
 	t_vec	oc;
+	t_vec	hitpoint;
 
 	denominator = dot(plane->orient, ray.direction);
 	if (denominator != 0)
@@ -36,20 +37,13 @@ void	rt_intersect_ray_plane(t_ray ray, t_objects *plane,
 		t = -dot(oc, plane->orient) / denominator;
 		if (t > dist_range[0] && t < dist_range[1] && t < inter->dist)
 		{
-
-
-		//float t;
-		t_vec hitpoint;
-
-		t = -dot(oc, plane->orient) / dot(ray.direction,  plane->orient);
-		hitpoint = t * ray.direction + oc;
-		if (vec_length(hitpoint) < 5)
-		{
+			t = -dot(oc, plane->orient) / dot(ray.direction, plane->orient);
+			hitpoint = t * ray.direction + oc;
+			if (vec_length(hitpoint) < 5)
+			{
 				inter->dist = t;
-				inter->closest_obj = plane;	
+				inter->closest_obj = plane;
+			}
 		}
-	}
-
-			
 	}
 }

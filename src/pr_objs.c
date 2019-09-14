@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_objs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 20:00:29 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 21:19:17 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ bool	pr_obj_sphere(const JSON_Object *j_ob, t_objects *sphere)
 {
 	if (!pr_vec_field(j_ob, "centre", &(sphere->centre)) ||
 		!pr_vec_field(j_ob, "orient", &(sphere->orient)) ||
+		!pr_vec_field(j_ob, "cut", &(sphere->cut)) ||
 		!pr_channel_color(j_ob, sphere) ||
 		!pr_specular(j_ob, sphere) ||
 		!pr_radius(j_ob, sphere) ||
 		!pr_reflection(j_ob, sphere) ||
-		!pr_vec_field(j_ob, "cut", &(sphere->cut)) ||
 		!pr_transparency(j_ob, sphere))
 		return (false);
 	pr_cut(sphere);
@@ -32,10 +32,10 @@ bool	pr_obj_plane(const JSON_Object *j_ob, t_objects *plane)
 {
 	if (!pr_vec_field(j_ob, "centre", &(plane->centre)) ||
 		!pr_vec_field(j_ob, "orient", &(plane->orient)) ||
+		!pr_vec_field(j_ob, "cut", &(plane->cut)) ||
 		!pr_channel_color(j_ob, plane) ||
 		!pr_specular(j_ob, plane) ||
 		!pr_reflection(j_ob, plane) ||
-		!pr_vec_field(j_ob, "cut", &(plane->cut)) ||
 		!pr_transparency(j_ob, plane))
 		return (false);
 	pr_cut(plane);
@@ -63,10 +63,10 @@ bool	pr_obj_cone(const JSON_Object *j_ob, t_objects *cone)
 {
 	if (!pr_vec_field(j_ob, "centre", &(cone->centre)) ||
 		!pr_vec_field(j_ob, "orient", &(cone->orient)) ||
+		!pr_vec_field(j_ob, "cut", &(cone->cut)) ||
 		!pr_channel_color(j_ob, cone) ||
 		!pr_specular(j_ob, cone) ||
 		!pr_angle(j_ob, cone) ||
-		!pr_vec_field(j_ob, "cut", &(cone->cut)) ||
 		!pr_transparency(j_ob, cone) ||
 		!pr_reflection(j_ob, cone))
 		return (false);

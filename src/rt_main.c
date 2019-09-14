@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 14:49:07 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/13 21:22:51 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 {
 	t_channel	local_color;
 	t_channel	reflected_color;
-	t_channel 	transparency_color;
+	t_channel	transparency_color;
 	t_intersect	inter;
 	double		i;
 
