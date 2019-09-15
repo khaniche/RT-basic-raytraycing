@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 17:36:52 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 17:16:20 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 09:23:07 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int		main(void)
 	ft_sdl_init(&app);
 	ft_mainloop(&app);
 	ft_sdl_clean(&app);
+	system("leaks -q RTv1");
 	return (0);
 }

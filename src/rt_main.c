@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 21:22:51 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 09:18:10 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 	if (depth <= 0 || inter.closest_obj->reflection <= 0)
 		return (local_color);
 	ray.origin = inter.hit;
+	printf("reflection = %f transparency = %f\n", inter.closest_obj->reflection, inter.closest_obj->transparency);
 	transparency_color = rt_trace_ray(ray, rt,
 		(double[2]) {0.001, DBL_MAX}, depth - 1);
 	ray.direction = rt_reflect_ray(inter.normal, -ray.direction);

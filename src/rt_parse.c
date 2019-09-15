@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:46:34 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 20:37:39 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 09:36:38 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ bool	parse_array_of_scene_objects(const JSON_Array *j_arr, t_objects **objs)
 		}
 	}
 	obj->next = NULL;
+	if (size_i[0] <= 2)
+		return (false);
 	json_object_clear(j_ob);
 	return (true);
 }
@@ -68,6 +70,8 @@ bool	parse_array_of_lights(const JSON_Array *j_arr, t_lights **lights)
 		}
 	}
 	light->next = NULL;
+	if (size_i[0] <= 2)
+		return (false);
 	json_object_clear(j_ob);
 	return (true);
 }
