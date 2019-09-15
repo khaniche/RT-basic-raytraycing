@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 18:37:07 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/15 20:06:06 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define RECURTION_DEPTH 3
 # define DEG_TO_RAD(angle) (M_PI * angle) / 180
 # define ROT_POWER DEG_TO_RAD(1);
+# define TEXTURES_COUNT 7
 
 typedef double			t_vec __attribute__((__ext_vector_type__(3)));
 
@@ -98,6 +99,7 @@ typedef struct			s_camera
 
 typedef struct			s_rt
 {
+	SDL_Surface			*texture[TEXTURES_COUNT];
 	t_objects			*objs;
 	t_lights			*lights;
 	t_camera			camera;
@@ -212,5 +214,7 @@ void					ft_event_(t_sdls *app);
 void					false_error(char *str);
 void					compose_obj(t_objects **obj);
 
+t_channel				texture_mapping(t_rt *rtv, t_vec p, t_objects *ob);
+bool					load_textures(t_rt *rtv);
 
 #endif

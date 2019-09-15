@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
+#    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/15 16:19:38 by khaniche         ###   ########.fr        #
+#    Updated: 2019/09/15 20:06:34 by dmolyboh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRC_FILES =		main.c \
 				key_hooks.c\
 				matrix_rotation.c\
 				rt_parabaloid.c\
-				compose_obj.c
+				compose_obj.c\
+				tx_texture.c\
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \

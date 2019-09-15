@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 17:31:56 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 20:19:28 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ bool		rt_find_closest_obj(t_ray ray, t_objects *objs, t_intersect *inter,
 	return (inter->closest_obj != NULL);
 }
 
+t_channel	get_color(t_rt *rt, t_objects *clost_obj, t_vec hit)
+{
+	t_channel	color;
+
+	if (clost_obj->texture_id == -1)
+		color = clost_obj->color;
+	else
+		color = texture_mapping(rt, inter.hit, clost_obj);
+	return (color);
+}
+
 t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 {
 	t_channel	local_color;
@@ -68,8 +79,12 @@ t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 		return ((t_channel) {0, 0, 0});
 	inter.hit = ray.origin + inter.dist * ray.direction;
 	inter.normal = rt_calc_normal(&inter, ray);
+
+	t_channel color_texture = texture_mapping(rt, inter.hit, inter.closest_obj);
+	
 	i = rt_compute_lighting(rt->objs, rt->lights, ray, &inter);
-	local_color = rt_enlightenment(inter.closest_obj->color, i);
+	// local_color = rt_enlightenment(inter.closest_obj->color, i);
+	local_color = rt_enlightenment(color_texture, i);
 	if (depth <= 0 || inter.closest_obj->reflection <= 0)
 		return (local_color);
 	ray.origin = inter.hit;

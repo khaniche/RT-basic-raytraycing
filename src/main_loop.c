@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:22:55 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 18:30:23 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/15 19:57:57 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,24 @@ void	ft_render(t_sdls *app)
 	cn_render(&(app->canvas));
 }
 
+void leaks_free(t_rt *rt)
+{
+	int   i;
+
+	i = -1;
+	while (++i < TEXTURES_COUNT)
+	{
+		SDL_FreeSurface(rt->texture[i]);
+		// rt->texture[i] = NULL;
+	}
+}
+
 void	ft_mainloop(t_sdls *app)
 {
 	t_rt rt;
 
+	if (load_textures(&rt) == false)
+		return ;
 	if (rt_parse_file(&rt, "scene.json") == false)
 		return ;
 	check_light(&rt.lights);
@@ -38,4 +52,5 @@ void	ft_mainloop(t_sdls *app)
 		}
 		ft_render(app);
 	}
+	leaks_free(&rt);
 }
