@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 17:17:24 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 17:52:46 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,3 @@ bool	pr_obj_par(const JSON_Object *j_ob, t_objects *par)
 	par->orient /= vec_length(par->orient);
 	return (true);
 }
-

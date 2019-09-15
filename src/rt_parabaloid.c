@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 14:07:21 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/15 17:37:52 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 17:53:04 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vec			rt_calc_par_normal(t_intersect *i, t_ray ray)
 
 	m = dot(ray.direction, i->closest_obj->orient) * i->dist +
 		dot((ray.origin - i->closest_obj->centre), i->closest_obj->orient);
-	normal = i->hit - i->closest_obj->centre - i->closest_obj->k -
+	normal = i->hit - i->closest_obj->centre - i->closest_obj->radius -
 		(i->closest_obj->orient * m);
 	return (normal / vec_length(normal));
 }
