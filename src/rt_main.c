@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/13 21:22:51 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 14:06:44 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void		rt_intersect_ray(t_ray ray, t_objects *objs, t_intersect *inter,
 		rt_intersect_ray_cylinder(ray, objs, inter, dist_range);
 	else if (objs->type == OBJ_CONE)
 		rt_intersect_ray_cone(ray, objs, inter, dist_range);
+	else if (objs->type == OBJ_PAR)
+		rt_intersect_ray_par(ray, objs, inter, dist_range);
 }
 
 t_vec		rt_calc_normal(t_intersect *inter, t_ray ray)
@@ -35,6 +37,8 @@ t_vec		rt_calc_normal(t_intersect *inter, t_ray ray)
 		return (rt_calc_cylinder_normal(inter, ray));
 	else if (inter->closest_obj->type == OBJ_CONE)
 		return (rt_calc_cone_normal(inter, ray));
+	else if (inter->closest_obj->type == OBJ_PAR)
+		return (rt_calc_par_normal(inter, ray));
 	else
 		return (0);
 }

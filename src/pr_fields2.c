@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:16:14 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 20:33:27 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 14:20:35 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ bool	pr_object2(const JSON_Object *j_ob, t_objects *obj, const char *obj_t)
 	{
 		obj->type = OBJ_CONE;
 		if (!pr_obj_cone(j_ob, obj))
+			return (false);
+	}
+	else if (ft_strcmp(obj_t, "parabaloid") == 0)
+	{
+		obj->type = OBJ_PAR;
+		if (!pr_obj_par(j_ob, obj))
 			return (false);
 	}
 	else

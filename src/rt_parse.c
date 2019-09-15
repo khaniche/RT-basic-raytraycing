@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:46:34 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 20:37:39 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 12:59:29 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ bool	parse_array_of_scene_objects(const JSON_Array *j_arr, t_objects **objs)
 		}
 	}
 	obj->next = NULL;
-	json_object_clear(j_ob);
 	return (true);
 }
 
@@ -68,7 +67,6 @@ bool	parse_array_of_lights(const JSON_Array *j_arr, t_lights **lights)
 		}
 	}
 	light->next = NULL;
-	json_object_clear(j_ob);
 	return (true);
 }
 
@@ -91,7 +89,6 @@ bool	pr_camera(const JSON_Object *j_ob, t_camera *camera)
 	camera->orient[0] = DEG_TO_RAD(camera->orient[0]);
 	camera->orient[1] = DEG_TO_RAD(camera->orient[1]);
 	camera->orient[2] = DEG_TO_RAD(camera->orient[2]);
-	json_object_clear(j_cam);
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 20:35:28 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 14:39:51 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@
 
 typedef double			t_vec __attribute__((__ext_vector_type__(3)));
 
-enum					e_obj_type {OBJ_SPHERE, OBJ_PLANE, OBJ_CONE, OBJ_CYL};
+enum					e_obj_type {OBJ_SPHERE, OBJ_PLANE, OBJ_CONE, OBJ_CYL,
+							OBJ_PAR};
 enum					e_light_type {LT_AMBIENT, LT_POINT, LT_DIRECT};
 
 typedef struct			s_channel
@@ -142,12 +143,15 @@ void					rt_intersect_ray_plane(t_ray ray, t_objects *plane,
 							t_intersect *inter, double *dist_range);
 void					rt_intersect_ray_cylinder(t_ray ray, t_objects *cyl,
 							t_intersect *inter, double *dist_range);
+void					rt_intersect_ray_par(t_ray ray, t_objects *par,
+							t_intersect *inter, double *dist_range);
 void					rt_intersect_ray_cone(t_ray ray, t_objects *cone,
 							t_intersect *inter, double *dist_range);
 t_vec					rt_calc_plane_normal(t_intersect *inter, t_ray ray);
+t_vec					rt_calc_cone_normal(t_intersect *i, t_ray ray);
 t_vec					rt_calc_sphere_normal(t_intersect *inter);
 t_vec					rt_calc_cylinder_normal(t_intersect *inter, t_ray ray);
-t_vec					rt_calc_cone_normal(t_intersect *inter, t_ray ray);
+t_vec					rt_calc_par_normal(t_intersect *inter, t_ray ray);
 Uint32					rt_channel_color_to_uint(t_channel color);
 void					rt_mainloop(t_rt *rt, Uint32 *pixels);
 t_channel				rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range,
@@ -173,6 +177,7 @@ bool					pr_object(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_obj_cone(const JSON_Object *j_ob, t_objects *cone);
 bool					pr_obj_cyl(const JSON_Object *j_ob, t_objects *cyl);
 bool					pr_obj_plane(const JSON_Object *j_ob, t_objects *plane);
+bool					pr_obj_par(const JSON_Object *j_ob, t_objects *par);
 bool					pr_obj_sphere(const JSON_Object *j_ob,
 										t_objects *sphere);
 bool					pr_light(const JSON_Object *j_ob, t_lights *light);
@@ -203,6 +208,7 @@ void					ft_event(t_sdls *app);
 void					ft_update(t_sdls *app, t_rt *rt);
 t_vec					moves(t_vec vec_rot, t_vec orient);
 void					ft_event_(t_sdls *app);
-bool					false_error(char *str);
+void					false_error(char *str);
+
 
 #endif

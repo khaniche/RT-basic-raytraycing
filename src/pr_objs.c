@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 15:29:15 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 15:24:07 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,21 @@ bool	pr_obj_cone(const JSON_Object *j_ob, t_objects *cone)
 	pr_cut(cone);
 	cone->orient /= vec_length(cone->orient);
 	cone->k = 1 + pow(tan(cone->radius / 2), 2);
+	return (true);
+}
+
+bool	pr_obj_par(const JSON_Object *j_ob, t_objects *par)
+{
+	if (!pr_vec_field(j_ob, "centre", &(par->centre)) ||
+		!pr_vec_field(j_ob, "orient", &(par->orient)) ||
+		!pr_vec_field(j_ob, "cut", &(par->cut)) ||
+		!pr_channel_color(j_ob, par) ||
+		!pr_specular(j_ob, par) ||
+		!pr_angle(j_ob, par) ||
+		!pr_transparency(j_ob, par) ||
+		!pr_reflection(j_ob, par))
+		return (false);
+	pr_cut(par);
+	par->orient /= vec_length(par->orient);
 	return (true);
 }
