@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:22:55 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 16:50:06 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 18:30:23 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_mainloop(t_sdls *app)
 	if (rt_parse_file(&rt, "scene.json") == false)
 		return ;
 	check_light(&rt.lights);
+	compose_obj(&rt.objs);
 	rt.pixels = app->canvas.pixels;
 	while (app->flags.running)
 	{

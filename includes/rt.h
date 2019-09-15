@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 16:33:07 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 18:37:07 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct			s_objects
 {
 	int					type;
 	int					texture;
+	int					compose;
 	double				specular;
 	double				reflection;
 	double				transparency;
@@ -198,6 +199,7 @@ bool					pr_transparency(const JSON_Object *j_ob,
 						t_objects *obj);
 void					pr_cut(t_objects *obj);
 bool					pr_texture(const JSON_Object *j_ob, t_objects *obj);
+bool					pr_compose(const JSON_Object *j_ob, t_objects *obj);
 void					check_light(t_lights **lg);
 
 void					*rt_threaded_loop(void *r);
@@ -208,6 +210,7 @@ void					ft_update(t_sdls *app, t_rt *rt);
 t_vec					moves(t_vec vec_rot, t_vec orient);
 void					ft_event_(t_sdls *app);
 void					false_error(char *str);
+void					compose_obj(t_objects **obj);
 
 
 #endif

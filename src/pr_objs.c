@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_objs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 17:52:46 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 18:14:51 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ bool	pr_obj_sphere(const JSON_Object *j_ob, t_objects *sphere)
 		!pr_vec_field(j_ob, "cut", &(sphere->cut)) ||
 		!pr_channel_color(j_ob, sphere) ||
 		!pr_specular(j_ob, sphere) ||
+		!pr_compose(j_ob, sphere) ||
 		!pr_radius(j_ob, sphere) ||
 		!pr_reflection(j_ob, sphere) ||
 		!pr_texture(j_ob, sphere) ||

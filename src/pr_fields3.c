@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_fields3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 21:23:35 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/15 17:14:42 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 18:37:35 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ bool	pr_transparency(const JSON_Object *j_ob, t_objects *obj)
 	obj->transparency = json_object_get_number(j_ob, "transparency");
 	if (obj->transparency > 1)
 		return (false);
+	return (true);
+}
+
+bool	pr_compose(const JSON_Object *j_ob, t_objects *obj)
+{
+	if (!json_object_has_value_of_type(j_ob, "compose", JSONNumber))
+	{
+		obj->compose = 0;
+		return (true);
+	}
+	obj->compose = json_object_get_number(j_ob, "compose");
 	return (true);
 }
 
