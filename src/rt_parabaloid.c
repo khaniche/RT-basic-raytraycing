@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 14:07:21 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/15 15:23:37 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 17:37:52 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		cut_par(t_intersect *inter, double *data, t_objects *par,
 	{
 		hit = data[2] * ray.direction + oc;
 		data[1] = dot(hit, par->orient);
-		if (data[1] > 0 && data[1] < 10)
+		if (data[1] > par->cut[0] && data[1] < par->cut[1])
 		{
 			inter->dist = data[2];
 			inter->closest_obj = par;
@@ -55,7 +55,7 @@ void			rt_intersect_ray_par(t_ray ray, t_objects *par,
 	data[3] = dot(ray.direction, par->orient);
 	data[4] = dot(oc, par->orient);
 	coeff[0] = 2.0 * (dot(ray.direction, ray.direction) - data[3] * data[3]);
-	coeff[1] = 2 * (dot(ray.direction, oc) - data[3] *
+	coeff[1] = 2.0 * (dot(ray.direction, oc) - data[3] *
 		(data[4] + 2.0 * par->radius));
 	coeff[2] = dot(oc, oc) - data[4] * (data[4] + 4.0 * par->radius);
 	data[0] = coeff.y * coeff.y - 2 * coeff.x * coeff.z;

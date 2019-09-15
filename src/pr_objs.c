@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 15:27:46 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 17:17:24 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ bool	pr_obj_sphere(const JSON_Object *j_ob, t_objects *sphere)
 		!pr_specular(j_ob, sphere) ||
 		!pr_radius(j_ob, sphere) ||
 		!pr_reflection(j_ob, sphere) ||
+		!pr_texture(j_ob, sphere) ||
 		!pr_transparency(j_ob, sphere))
 		return (false);
 	pr_cut(sphere);
@@ -92,3 +93,4 @@ bool	pr_obj_par(const JSON_Object *j_ob, t_objects *par)
 	par->orient /= vec_length(par->orient);
 	return (true);
 }
+

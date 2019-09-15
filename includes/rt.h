@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 14:39:51 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 16:33:07 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct			s_lights
 typedef struct			s_objects
 {
 	int					type;
+	int					texture;
 	double				specular;
 	double				reflection;
 	double				transparency;
@@ -92,9 +93,6 @@ typedef struct			s_camera
 {
 	t_vec				origin;
 	t_vec				orient;
-	double				rot_x[3][3];
-	double				rot_y[3][3];
-	double				rot_z[3][3];
 }						t_camera;
 
 typedef struct			s_rt
@@ -199,6 +197,7 @@ bool					pr_radius(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_transparency(const JSON_Object *j_ob,
 						t_objects *obj);
 void					pr_cut(t_objects *obj);
+bool					pr_texture(const JSON_Object *j_ob, t_objects *obj);
 void					check_light(t_lights **lg);
 
 void					*rt_threaded_loop(void *r);

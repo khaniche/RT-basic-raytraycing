@@ -6,11 +6,24 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 21:23:35 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/14 18:13:11 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/15 17:14:42 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+bool	pr_texture(const JSON_Object *j_ob, t_objects *obj)
+{
+	if (!json_object_has_value_of_type(j_ob, "texture", JSONNumber))
+	{
+		obj->texture = -1;
+		return (true);
+	}
+	obj->texture = json_object_get_number(j_ob, "texture");
+	if (obj->texture < 1 && obj->texture > 6)
+		return (false);
+	return (true);
+}
 
 bool	pr_transparency(const JSON_Object *j_ob, t_objects *obj)
 {

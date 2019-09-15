@@ -2,14 +2,15 @@
 	"objects": [
 	 {
 	  "type": "parabaloid",
-	  "centre": [1, -10, 5],
+	  "centre": [1, -1, 5],
 	  "orient": [0, 1, 1],
 	  "color": [255, 0, 0],
 	  "radius": 9,
 	  "angle": 45,
 	  "reflection": 0,
+	  "texture": 5,
 	  "specular": 100,
-	  "cut": [0, 0, 0],
+	  "cut": [1, 4, 0],
 	  "transparency" : 0
 	 }],
 	"lights": [{
@@ -17,7 +18,7 @@
 	 "intensity": 0.15
 	}, {
 	 "type": "point",
-	 "position": [0, 25, -25],
+	 "position": [0, 100, -50],
 	 "intensity": 0.4
 	}]
    }
