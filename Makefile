@@ -6,7 +6,7 @@
 #    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/15 20:06:34 by dmolyboh         ###   ########.fr        #
+#    Updated: 2019/09/16 13:32:56 by dmolyboh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC_FILES =		main.c \
 				rt_parabaloid.c\
 				compose_obj.c\
 				tx_texture.c\
+				bonus.c 
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \

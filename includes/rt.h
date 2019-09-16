@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 12:46:43 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/16 13:32:39 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,4 +220,10 @@ void					compose_obj(t_objects **obj);
 t_channel				texture_mapping(t_rt *rtv, t_vec p, t_objects *ob);
 bool					load_textures(t_rt *rtv);
 
+/**
+**Bomus color func
+**/
+void sepia_image(Uint32 *pixels, Uint32 *pixels_copy);
+void save_image(const char* file_name, SDL_Renderer* renderer);
+void AntiAliasing(Uint32 *pixels, int intensive);
 #endif

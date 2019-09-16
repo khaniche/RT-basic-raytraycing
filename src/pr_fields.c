@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:08 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 12:34:58 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/16 17:30:24 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ bool	pr_channel_color(const JSON_Object *j_ob, t_objects *obj)
 	else if (obj->color.b > 255)
 		obj->color.b = 255;
 	return (true);
-	free(j_arr);
 }
 
 /*
