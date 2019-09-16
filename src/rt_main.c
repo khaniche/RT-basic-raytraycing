@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 20:19:28 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/16 10:18:50 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,6 @@ bool		rt_find_closest_obj(t_ray ray, t_objects *objs, t_intersect *inter,
 	return (inter->closest_obj != NULL);
 }
 
-t_channel	get_color(t_rt *rt, t_objects *clost_obj, t_vec hit)
-{
-	t_channel	color;
-
-	if (clost_obj->texture_id == -1)
-		color = clost_obj->color;
-	else
-		color = texture_mapping(rt, inter.hit, clost_obj);
-	return (color);
-}
-
 t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 {
 	t_channel	local_color;
@@ -80,22 +69,36 @@ t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 	inter.hit = ray.origin + inter.dist * ray.direction;
 	inter.normal = rt_calc_normal(&inter, ray);
 
-	t_channel color_texture = texture_mapping(rt, inter.hit, inter.closest_obj);
 	
 	i = rt_compute_lighting(rt->objs, rt->lights, ray, &inter);
-	// local_color = rt_enlightenment(inter.closest_obj->color, i);
-	local_color = rt_enlightenment(color_texture, i);
-	if (depth <= 0 || inter.closest_obj->reflection <= 0)
+	if (inter.closest_obj->texture !=0)
+	{
+		t_channel color_texture = texture_mapping(rt, inter.hit, inter.closest_obj);
+		local_color = rt_enlightenment(color_texture, i);
+	}
+	else
+		local_color = rt_enlightenment(inter.closest_obj->color, i);
+	if (depth <= 0 || (inter.closest_obj->reflection <= 0 && inter.closest_obj->transparency <= 0))
 		return (local_color);
 	ray.origin = inter.hit;
-	transparency_color = rt_trace_ray(ray, rt,
-		(double[2]) {0.001, DBL_MAX}, depth - 1);
+	if (inter.closest_obj->transparency > 0)
+	{
+		transparency_color = rt_trace_ray(ray, rt,
+			(double[2]) {0.001, DBL_MAX}, depth - 1);
+	}
+	else 
+		transparency_color = (t_channel){0,0,0};
 	ray.direction = rt_reflect_ray(inter.normal, -ray.direction);
 	ray.origin = inter.hit;
-	reflected_color = rt_trace_ray(ray, rt,
-		(double[2]) {0.001, DBL_MAX}, depth - 1);
-	return (rt_calc_reflected_color(local_color, reflected_color,
-		inter.closest_obj->reflection, transparency_color));
+	if (inter.closest_obj->reflection > 0)
+	{
+		reflected_color = rt_trace_ray(ray, rt,
+			(double[2]) {0.001, DBL_MAX}, depth - 1);
+	}
+	else 
+		reflected_color = (t_channel){0,0,0};
+	return (rt_calc_ref_tran_color(local_color, reflected_color,
+		transparency_color, inter.closest_obj->reflection, inter.closest_obj->transparency));
 }
 
 void		*rt_threaded_loop(void *r)

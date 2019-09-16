@@ -1,19 +1,7 @@
 {
 	"objects": [
-	 {
-	  "type": "sphere",
-	  "centre": [1, -1, 5],
-	  "orient": [0, 1, 1],
-	  "color": [255, 0, 0],
-	  "radius": 1,
-	  "angle": 45,
-	  "compose": 0,
-	  "reflection": 0,
-	  "texture": 5,
-	  "specular": 100,
-	  "cut": [1, 4, 0],
-	  "transparency" : 0
-	 }],
+	
+	],
 	"lights": [{
 	 "type": "ambient",
 	 "intensity": 0.15

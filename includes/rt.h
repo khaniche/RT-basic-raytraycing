@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 20:06:06 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/16 11:06:23 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,10 @@ t_channel				rt_enlightenment(t_channel color, double intensity);
 t_vec					rt_canvas_to_viewport(int x, int y);
 double					rt_compute_lighting(t_objects *objs,
 							t_lights *lights, t_ray ray, t_intersect *inter);
-t_channel				rt_calc_reflected_color(t_channel local_color,
-			t_channel reflected_color, double r, t_channel trancperency_color);
+
+t_channel	rt_calc_ref_tran_color(t_channel local_color,
+			t_channel reflected_color, t_channel trancperency_color,
+			double r, double t);
 t_vec					rt_reflect_ray(t_vec normal, t_vec ray_dir);
 t_vec					rt_calc_normal(t_intersect *inter, t_ray ray);
 double					vec_length(t_vec v);
@@ -211,7 +213,7 @@ void					ft_event(t_sdls *app);
 void					ft_update(t_sdls *app, t_rt *rt);
 t_vec					moves(t_vec vec_rot, t_vec orient);
 void					ft_event_(t_sdls *app);
-void					false_error(char *str);
+bool					false_error(char *str);
 void					compose_obj(t_objects **obj);
 
 t_channel				texture_mapping(t_rt *rtv, t_vec p, t_objects *ob);

@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   rt_light.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 20:48:06 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 14:05:26 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/16 10:08:06 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_channel	rt_calc_reflected_color(t_channel local_color,
-				t_channel reflected_color, double r,
-				t_channel trancperency_color)
-{
-	local_color.r = local_color.r * (1 - r) +
-		reflected_color.r * r / 2 + trancperency_color.r * r / 2;
-	local_color.g = local_color.g * (1 - r) +
-		reflected_color.g * r / 2 + trancperency_color.g * r / 2;
-	local_color.b = local_color.b * (1 - r) +
-		reflected_color.b * r / 2 + trancperency_color.b * r / 2;
+t_channel	rt_calc_ref_tran_color(t_channel local_color,
+			t_channel reflected_color, t_channel trancperency_color,
+			double r, double t)
+{	
+	local_color.r = local_color.r * (1 - t) * (1 - r) + reflected_color.r * r + trancperency_color.r * t;
+	local_color.g = local_color.g * (1 - t) * (1 - r) + reflected_color.g * r + trancperency_color.g * t;
+	local_color.b = local_color.b * (1 - t) * (1 - r) + reflected_color.b * r + trancperency_color.b * t;
+	local_color = rt_enlightenment(local_color, 1);
 	return (local_color);
 }
 

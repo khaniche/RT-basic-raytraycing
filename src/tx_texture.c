@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 15:42:03 by dshereme          #+#    #+#             */
-/*   Updated: 2019/09/15 20:10:55 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/16 10:14:38 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_vec	normalize(t_vec vec)
 	return ((1.0 / vec_length(vec)) * vec);
 }
 
-# define N 1
+# define N 5
 
 t_channel		texture_mapping(t_rt *rtv, t_vec p, t_objects *ob)
 {
@@ -95,10 +95,10 @@ t_channel		texture_mapping(t_rt *rtv, t_vec p, t_objects *ob)
 	
 	p -= ob->centre;
 	p =  normalize(p);
-	u = (0.5 + atan2(p.z, p.x) / (2.0 * M_PI)) * rtv->texture[N]->w;
-	v = rtv->texture[N]->h - ((0.5 - asin(p.y) / M_PI) * rtv->texture[N]->h);
-	int_color = get_texel(rtv->texture[N]->pixels,
-	(v * rtv->texture[N]->w + u) * 3);
+	u = (0.5 + atan2(p.z, p.x) / (2.0 * M_PI)) * rtv->texture[ob->texture]->w;
+	v = rtv->texture[ob->texture]->h - ((0.5 - asin(p.y) / M_PI) * rtv->texture[ob->texture]->h);
+	int_color = get_texel(rtv->texture[ob->texture]->pixels,
+	(v * rtv->texture[ob->texture]->w + u) * 3);
 	color = color_to_vec(int_color);
 	return (color);
 }
