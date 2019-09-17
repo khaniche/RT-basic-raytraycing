@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:46:34 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 11:52:59 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 12:00:58 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ bool	parse_array_of_scene_objects(const JSON_Array *j_arr, t_objects **objs)
 			return (false);
 		}
 	}
-	if (size_i[0] <= 0)
-		return (false);
 	obj->next = NULL;
-	return (true);
+	return ((size_i[0] <= 0) ? false : true);
 }
 
 bool	parse_array_of_lights(const JSON_Array *j_arr, t_lights **lights)
@@ -68,10 +66,8 @@ bool	parse_array_of_lights(const JSON_Array *j_arr, t_lights **lights)
 			return (false);
 		}
 	}
-	if (size_i[0] <= 0)
-		return (false);
 	light->next = NULL;
-	return (true);
+	return ((size_i[0] <= 0) ? false : true);
 }
 
 bool	pr_camera(const JSON_Object *j_ob, t_camera *camera)
@@ -120,13 +116,13 @@ bool	rt_parse_file(t_rt *rt, const char *fname)
 	rt->objs = NULL;
 	rt->lights = NULL;
 	if ((json_val = json_parse_file(fname)) == NULL)
-		return(false_error("Error while parsing json"));
+		return (false_error("Error while parsing json"));
 	if ((json_objs = json_value_get_object(json_val)) == NULL)
-		return(false_error("Error while getting object from value"));
+		return (false_error("Error while getting object from value"));
 	if (!rt_parse_file_(rt, json_objs))
 		return (false);
 	if (!(pr_camera(json_objs, &(rt->camera))))
-		return(false_error("Error while parsing camera"));
+		return (false_error("Error while parsing camera"));
 	ft_putendl("All good so far");
 	json_object_clear(json_objs);
 	json_value_free(json_val);

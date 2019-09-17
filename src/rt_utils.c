@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 15:21:23 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 10:10:30 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 12:01:26 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ t_vec		normalize(t_vec vec)
 bool		false_error(char *str)
 {
 	ft_putendl(str);
-	return(false);
+	return (false);
 }

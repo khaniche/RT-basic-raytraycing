@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:08 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 19:18:16 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 11:17:27 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	pr_vec_field(const JSON_Object *j_ob, const char *field_name, t_vec *v)
 /*
 **	TODO: validate value type of array objects
 */
-/****Myabe leaks freee 52(j_arrr)***/////
+
 bool	pr_channel_color(const JSON_Object *j_ob, t_objects *obj)
 {
 	JSON_Array	*j_arr;

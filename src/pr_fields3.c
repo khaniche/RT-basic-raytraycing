@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 21:23:35 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/17 11:39:46 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/17 11:51:59 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	pr_transparency(const JSON_Object *j_ob, t_objects *obj)
 	}
 	obj->transparency = json_object_get_number(j_ob, "transparency");
 	if (obj->transparency > 1)
-		return (false);
+		return (false_error("transparency > 1"));
 	return (true);
 }
 
@@ -58,7 +58,7 @@ void	pr_cut(t_objects *obj)
 	}
 }
 
-bool	check_reflect__transparency(t_objects *obj)
+bool	check_reflect_transparency(t_objects *obj)
 {
 	if (obj->reflection >= 0.5 && obj->transparency >= 0.5)
 		return (false_error("Chandge your reflection or transparency"));

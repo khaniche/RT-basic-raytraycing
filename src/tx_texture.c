@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 15:42:03 by dshereme          #+#    #+#             */
-/*   Updated: 2019/09/17 10:49:12 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 11:41:56 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ bool				load_textures(t_rt *rtv)
 				free(s);
 			return (false);
 		}
-		if (s)	
+		if (s)
 			free(s);
 	}
- return (true);
+	return (true);
 }
 
 static Uint32		get_texel(void *pixels, int idx)
@@ -65,14 +65,14 @@ static Uint32		get_texel(void *pixels, int idx)
 	return (red | green | blue);
 }
 
-static t_channel 	color_to_vec(int rgb)
+static	t_channel	color_to_vec(int rgb)
 {
 	Uint32				red;
 	Uint32				green;
 	Uint32				blue;
 
 	red = (rgb >> 16) & 0xFF;
-	green = (rgb >> 8) & 0xFF ;
+	green = (rgb >> 8) & 0xFF;
 	blue = (rgb) & 0xFF;
 	return ((t_channel){red, green, blue});
 }
@@ -86,8 +86,10 @@ t_channel			texture_mapping(t_rt *rtv, t_vec p, t_objects *ob)
 
 	p -= ob->centre;
 	p = normalize(p);
-	u = (0.5 + atan2(p.z, p.x) / (2.0 * M_PI)) * rtv->texture[ob->texture]->w;
-	v = rtv->texture[ob->texture]->h - ((0.5 - asin(p.y) / M_PI) * rtv->texture[ob->texture]->h);
+	u = (0.5 + atan2(p.z, p.x) / (2.0 * M_PI))
+	* rtv->texture[ob->texture]->w;
+	v = rtv->texture[ob->texture]->h - ((0.5 - asin(p.y) / M_PI) *
+	rtv->texture[ob->texture]->h);
 	int_color = get_texel(rtv->texture[ob->texture]->pixels,
 	(v * rtv->texture[ob->texture]->w + u) * 3);
 	color = color_to_vec(int_color);

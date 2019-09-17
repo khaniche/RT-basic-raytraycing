@@ -6,13 +6,13 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 16:18:52 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/17 10:48:04 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 11:15:04 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void copy_(t_objects *ob, t_objects *copy)
+static void		copy_(t_objects *ob, t_objects *copy)
 {
 	static int	i;
 
@@ -27,7 +27,7 @@ static void copy_(t_objects *ob, t_objects *copy)
 	{
 		copy->centre = ob->centre;
 		copy->centre.y -= ob->radius * 2;
-	}	
+	}
 	copy->color = ob->color;
 	copy->orient = ob->orient;
 	if (i == 0)
@@ -40,9 +40,17 @@ static void copy_(t_objects *ob, t_objects *copy)
 	i++;
 }
 
-void	compose_obj(t_objects **obj)
+static	void	spec(t_objects **obj, t_objects *ob, t_objects *t_ob)
 {
-	t_objects	*ob = NULL;
+	*obj = ob;
+	ob->specular = 50;
+	ob->next->specular = 0;
+	t_ob->specular = 0;
+}
+
+void			compose_obj(t_objects **obj)
+{
+	t_objects	*ob;
 	t_objects	*t_ob;
 	bool		compose;
 
@@ -65,10 +73,6 @@ void	compose_obj(t_objects **obj)
 		copy_(t_ob, ob);
 		copy_(t_ob, ob->next);
 		ob->next->next = *obj;
-		*obj = ob;
-		ob->specular = 50;
-		ob->next->specular = 0;
-		t_ob->specular = 0;
-		
+		spec(obj, ob, t_ob);
 	}
 }
