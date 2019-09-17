@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 12:45:53 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:46:55 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ bool	pr_obj_plane(const JSON_Object *j_ob, t_objects *plane)
 		!pr_specular(j_ob, plane) ||
 		!check_reflect__transparency(plane)||
 		!pr_radius(j_ob, plane) ||
+		!pr_texture(j_ob, plane) ||  ///////////////////////////////////////////////texture
 		!pr_reflection(j_ob, plane) ||
 		!pr_transparency(j_ob, plane))
 		return (false);
@@ -56,6 +57,7 @@ bool	pr_obj_cyl(const JSON_Object *j_ob, t_objects *cyl)
 		!pr_channel_color(j_ob, cyl) ||
 		!pr_specular(j_ob, cyl) ||
 		!pr_radius(j_ob, cyl) ||
+		!pr_texture(j_ob, cyl) ||  ///////////////////////////////////////////////texture
 		!check_reflect__transparency(cyl) ||
 		!pr_reflection(j_ob, cyl) ||
 		!pr_transparency(j_ob, cyl))
@@ -74,6 +76,7 @@ bool	pr_obj_cone(const JSON_Object *j_ob, t_objects *cone)
 		!pr_specular(j_ob, cone) ||
 		!check_reflect__transparency(cone) ||
 		!pr_angle(j_ob, cone) ||
+		!pr_texture(j_ob, cone) ||  ///////////////////////////////////////////////texture
 		!pr_transparency(j_ob, cone) ||
 		!pr_reflection(j_ob, cone))
 		return (false);
@@ -91,6 +94,7 @@ bool	pr_obj_par(const JSON_Object *j_ob, t_objects *par)
 		!pr_channel_color(j_ob, par) ||
 		!pr_specular(j_ob, par) ||
 		!pr_angle(j_ob, par) ||
+		!pr_texture(j_ob, par) || ///////////////////////////////////////////////texture
 		!check_reflect__transparency(par) ||
 		!pr_transparency(j_ob, par) ||
 		!pr_reflection(j_ob, par))

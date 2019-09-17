@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:24:36 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/16 19:14:59 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:58:36 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			anti_aliasing(Uint32 *pixels, int intensive)
 	}
 }
 
-t_channel		noise_text(t_rt *rtv, t_vec p, t_objects *ob)
+t_channel		noise_text(t_vec p, t_objects *ob)
 {
 	t_channel	color;
 	Uint32		new_pixel;
@@ -88,17 +88,11 @@ t_channel		noise_text(t_rt *rtv, t_vec p, t_objects *ob)
 	int			v;
 
 	p -= ob->centre;
-	//p = normalize(p);
+	p = normalize(p);
 	u = 0;
 	v = 0;
-	u = (sin(p.x * 2 * M_PI * 5) + 1) * 10000000;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10000000;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10000000;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10000000;
-	v = (cos(p.x * 2 * M_PI * 5) + 1) * 10000000;
-	v += (cos(p.x * 2 * M_PI * 5) + 1) * 10000000;
-	v += (cos(p.x * 2 * M_PI * 5) + 1) * 10000000;
-	v += (cos(p.x * 2 * M_PI * 5) + 1) * 10000000;
+	u = ((sin(p.x * 2 * M_PI * 5) + 1) * 10000000) * 4;
+	v = ((cos(p.x * 2 * M_PI * 5) + 1) * 10000000) * 4;
 	if (v)
 		u *= v;
 	color = (t_channel){(u >> 16) & 0xFF, (u >> 8) & 0xFF, (u & 0xFF)};
@@ -112,24 +106,18 @@ t_channel		noise_text(t_rt *rtv, t_vec p, t_objects *ob)
 	return (color);
 }
 
-t_channel		wave_chechboard(t_rt *rtv, t_vec p, t_objects *ob)
+t_channel		wave_chechboard(t_vec p, t_objects *ob)
 {
 	int			u;
 	int			v;
 	t_channel	color;
 
 	p -= ob->centre;
-//	p = normalize(p);
+	p = normalize(p);
 	u = 0;
 	v = 0;
-	u = (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	v = (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
+	u = ((sin(p.x * 2 * M_PI * 5) + 1) * 10) * 4;
+	v = ((cos(p.y * 2 * M_PI * 5) + 1) * 10) * 4;
 	if (v)
 		u *= v;
 	color = (t_channel){(u >> 16) & 0xFF, (u >> 8) & 0xFF, (u & 0xFF)};
@@ -151,25 +139,3 @@ t_channel		cartoon(t_channel col)
 	col.b = (255 - rgb) < 0 ? 0 : (255 - rgb);
 	return (col);
 }
-
-
-// if (color.r == 255 ||  color.g == 255 || color.b == 255)
-// {
-// 	color.r = 0;
-// 	color.g = 0;
-// 	color.b = 0;
-// }
-
-//                     resultBuffer[k] = 0;
-//                     resultBuffer[k + 1] = 0;
-//                     resultBuffer[k + 2] = 0;
-//                     resultBuffer[k + 3] = 255;
-//                 }
-//                 else
-//                 {
-//                     resultBuffer[k] = paintPixelBuffer[k];
-//                     resultBuffer[k + 1] = paintPixelBuffer[k + 1];
-//                     resultBuffer[k + 2] = paintPixelBuffer[k + 2];
-//                     resultBuffer[k + 3] = 255;
-//                 }
-//             }

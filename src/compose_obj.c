@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 16:18:52 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/15 19:01:35 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:48:04 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void copy_(t_objects *ob, t_objects *copy)
 {
 	static int	i;
-		printf("asd\n");
 
 	copy->specular = ob->specular;
 	copy->color = ob->color;

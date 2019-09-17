@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 21:23:35 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/16 12:44:16 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:51:31 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ bool	pr_texture(const JSON_Object *j_ob, t_objects *obj)
 		return (true);
 	}
 	obj->texture = json_object_get_number(j_ob, "texture");
-	if (obj->texture < 0 || obj->texture > TEXTURES_COUNT)
-	{
-		ft_putstr("Error int count texture, ivalid count\n");
-		return (false);
-	}
 	return (true);
 }
 

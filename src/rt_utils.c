@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 15:21:23 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 11:06:06 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:10:30 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,13 @@ void		rt_mainloop(t_rt *rt, Uint32 *pixels)
 	}
 }
 
+t_vec		normalize(t_vec vec)
+{
+	return ((1.0 / vec_length(vec)) * vec);
+}
+
 bool		false_error(char *str)
 {
 	ft_putendl(str);
-	system("leaks -q RTv1");
 	return(false);
 }

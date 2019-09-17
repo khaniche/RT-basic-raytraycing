@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 10:18:50 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:52:08 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ t_channel	rt_trace_ray(t_ray ray, t_rt *rt, double *dist_range, int depth)
 	double		i;
 
 	if (!rt_find_closest_obj(ray, rt->objs, &inter, dist_range))
+	{
 		return ((t_channel) {0, 0, 0});
+	}
 	inter.hit = ray.origin + inter.dist * ray.direction;
 	inter.normal = rt_calc_normal(&inter, ray);
 
-	
 	i = rt_compute_lighting(rt->objs, rt->lights, ray, &inter);
-	if (inter.closest_obj->texture !=0)
+	if (inter.closest_obj->texture > -1 && inter.closest_obj->texture < TEXTURES_COUNT)
 	{
 		t_channel color_texture = texture_mapping(rt, inter.hit, inter.closest_obj);
 		local_color = rt_enlightenment(color_texture, i);

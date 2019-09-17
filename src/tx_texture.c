@@ -6,30 +6,28 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 15:42:03 by dshereme          #+#    #+#             */
-/*   Updated: 2019/09/16 10:14:38 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:49:12 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-
-static bool	load_texture(t_rt *rtv, char *text_path)
+static bool			load_texture(t_rt *rtv, char *text_path)
 {
-	static	int		texture_numb;
+	static	int			texture_numb;
 
 	rtv->texture[texture_numb] = SDL_LoadBMP(text_path);
-    if (rtv->texture[texture_numb++] == NULL) {
-        printf("texture_numb:\t%d\n", texture_numb);
+	if (rtv->texture[texture_numb++] == NULL)
 		return (false);
-    }
 	return (true);
 }
 
-bool	load_textures(t_rt *rtv)
+bool				load_textures(t_rt *rtv)
 {
-	int   i;
-	char  *leaks;
-	char  *s;
+	int					i;
+	char				*leaks;
+	char				*s;
+
 	leaks = NULL;
 	i = -1;
 	while (++i < TEXTURES_COUNT)
@@ -48,17 +46,17 @@ bool	load_textures(t_rt *rtv)
 			return (false);
 		}
 		if (s)	
-    		free(s);            
+			free(s);
 	}
  return (true);
 }
-	
+
 static Uint32		get_texel(void *pixels, int idx)
 {
 	unsigned	char	*pix;
-	Uint32		red;
-	Uint32		green;
-	Uint32		blue;
+	Uint32				red;
+	Uint32				green;
+	Uint32				blue;
 
 	pix = (unsigned char*)pixels;
 	blue = pix[idx];
@@ -67,34 +65,27 @@ static Uint32		get_texel(void *pixels, int idx)
 	return (red | green | blue);
 }
 
-static t_channel 		color_to_vec(int rgb)
+static t_channel 	color_to_vec(int rgb)
 {
-	Uint32			red;
-	Uint32			green;
-	Uint32			blue;
-    
+	Uint32				red;
+	Uint32				green;
+	Uint32				blue;
+
 	red = (rgb >> 16) & 0xFF;
-    green = (rgb >> 8) & 0xFF ;
-    blue = (rgb) & 0xFF;
+	green = (rgb >> 8) & 0xFF ;
+	blue = (rgb) & 0xFF;
 	return ((t_channel){red, green, blue});
 }
 
-t_vec	normalize(t_vec vec)
+t_channel			texture_mapping(t_rt *rtv, t_vec p, t_objects *ob)
 {
-	return ((1.0 / vec_length(vec)) * vec);
-}
+	int					u;
+	int					v;
+	t_channel			color;
+	Uint32				int_color;
 
-# define N 5
-
-t_channel		texture_mapping(t_rt *rtv, t_vec p, t_objects *ob)
-{
-	int			u;
-	int			v;
-	t_channel		color;
-	Uint32		int_color;
-	
 	p -= ob->centre;
-	p =  normalize(p);
+	p = normalize(p);
 	u = (0.5 + atan2(p.z, p.x) / (2.0 * M_PI)) * rtv->texture[ob->texture]->w;
 	v = rtv->texture[ob->texture]->h - ((0.5 - asin(p.y) / M_PI) * rtv->texture[ob->texture]->h);
 	int_color = get_texel(rtv->texture[ob->texture]->pixels,

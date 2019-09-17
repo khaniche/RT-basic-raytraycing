@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 17:22:57 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/12 20:09:27 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:15:08 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CANVAS_H
 # define CANVAS_H
-# define CN_WIDTH 800
-# define CN_HEIGHT 800
+# define CN_WIDTH 80
+# define CN_HEIGHT 80
 # include "SDL2/SDL.h"
 # include "window.h"
 # include "error_handler.h"

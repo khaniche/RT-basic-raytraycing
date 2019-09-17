@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:22:55 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/16 12:44:44 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 10:14:08 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ void	ft_mainloop(t_sdls *app)
 {
 	t_rt rt;
 
-	if (load_textures(&rt) == false)
-		return ;
 	if (rt_parse_file(&rt, "scene.json") == false)
+		return ;
+	if (load_textures(&rt) == false)
 		return ;
 	check_light(&rt.lights);
 	compose_obj(&rt.objs);
 	rt.pixels = app->canvas.pixels;
+
 	while (app->flags.running)
 	{
 		ft_event(app);

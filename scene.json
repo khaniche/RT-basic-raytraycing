@@ -1,40 +1,24 @@
 {
-	"objects": [
-	 {
-	  "type": "sphere",
-	  "centre": [3, -1, 5],
-	  "orient": [0, 1, 1],
-	  "color": [255, 0, 0],
-	  "radius": 1,
-	  "angle": 45,
-	  "compose": 1,
-	  "reflection": 0,
-	  "texture": 5,
-	  "specular": 100,
-	  "cut": [1, 4, 0],
-	  "transparency" : 0
-	 },
-	 {
-		"type": "sphere",
-		"centre": [1, -1, 9],
+	"objects":
+	[{
+		"type": "cylinder",
+		"centre": [3, -1, 5],
 		"orient": [0, 1, 1],
 		"color": [255, 0, 0],
-		"radius": 2,
-		"angle": 45,
-		"compose": 1,
+		"radius": 1,
 		"reflection": 0,
-		"texture": 3,
 		"specular": 100,
-		"cut": [1, 4, 0],
-		"transparency" : 0.5
-	}
-	],
-	"lights": [{
-	 "type": "ambient",
-	 "intensity": 0.15
-	}, {
-	 "type": "point",
-	 "position": [0, 100, -50],
-	 "intensity": 0.4
+		"cut": [0, 0, 0],
+		"transparency" : 0
+	}],
+	"lights":
+	[{
+		"type": "ambient",
+		"intensity": 0.6
+	},
+	{
+		"type": "point",
+		"position": [0, 100, -50],
+		"intensity": 0.4
 	}]
-   }
+}
