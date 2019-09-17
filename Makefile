@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
+#    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/16 13:32:56 by dmolyboh         ###   ########.fr        #
+#    Updated: 2019/09/17 22:15:40 by khaniche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRC_FILES =		main.c \
 				rt_parabaloid.c\
 				compose_obj.c\
 				tx_texture.c\
-				bonus.c 
+				bonus.c\
+				rt_cut_and_sort_roots.c
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \
