@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 10:04:20 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 12:30:17 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ bool					pr_transparency(const JSON_Object *j_ob,
 void					pr_cut(t_objects *obj);
 bool					pr_texture(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_compose(const JSON_Object *j_ob, t_objects *obj);
-bool					check_reflect__transparency(t_objects *obj);
+bool					check_reflect_transparency(t_objects *obj);
 void					check_light(t_lights **lg);
 
 void					*rt_threaded_loop(void *r);

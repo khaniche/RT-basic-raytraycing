@@ -1,24 +1,64 @@
 {
 	"objects":
-	[{
-		"type": "cylinder",
-		"centre": [3, -1, 5],
-		"orient": [0, 1, 1],
-		"color": [255, 0, 0],
-		"radius": 1,
-		"reflection": 0,
-		"specular": 100,
-		"cut": [0, 0, 0],
-		"transparency" : 0
-	}],
+	[
+		{
+			"type": "cylinder",
+			"centre": [3, -1, 5],
+			"orient": [0, 1, 1],
+			"color": [255, 0, 0],
+			"radius": 1,
+			"reflection": 0,
+			"specular": 100,
+			"cut": [0, 0, 0],
+			"transparency" : 0
+		},
+		{
+			"type": "sphere",
+			"centre": [3, 7, 10],
+			"orient": [0, 1, 1],
+			"color": [0, 255, 255],
+			"radius": 1,
+			"compose": 0,
+			"texture": 2,
+			"reflection": 0,
+			"specular": 100,
+			"cut": [0, 0, 0],
+			"transparency" : 0
+		},
+		{
+			"type": "sphere",
+			"centre": [3, 5, 8],
+			"orient": [0, 1, 1],
+			"color": [255, 255, 0],
+			"radius": 1,
+			"reflection": 0,
+			"specular": 100,
+			"cut": [0, 0, 0],
+			"transparency" : 0.5
+		}
+		,
+		{
+			"type": "sphere",
+			"centre": [3, 3, 6],
+			"orient": [0, 1, 1],
+			"color": [255, 0, 255],
+			"radius": 1,
+			"reflection": 0,
+			"specular": 100,
+			"cut": [0, 0, 0],
+			"transparency" : 1
+		}
+	],
 	"lights":
-	[{
-		"type": "ambient",
-		"intensity": 0.6
-	},
-	{
-		"type": "point",
-		"position": [0, 100, -50],
-		"intensity": 0.4
-	}]
+	[
+		{
+			"type": "ambient",
+			"intensity": 0.6
+		},
+		{
+			"type": "point",
+			"position": [0, 100, -50],
+			"intensity": 0.4
+		}
+	]
 }
