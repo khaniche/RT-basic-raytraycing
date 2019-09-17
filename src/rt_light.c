@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_light.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 20:48:06 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 11:58:24 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 20:32:09 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double		rt_calc_specularity(t_vec normal, t_vec light,
 	return (i);
 }
 
-bool		rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
+t_objects		*rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
 								int l_type)
 {
 	double		dist_range[2];
@@ -56,11 +56,11 @@ bool		rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
 	while (objs)
 	{
 		rt_intersect_ray(ray, objs, &inter, dist_range);
-		if (inter.closest_obj != NULL)
-			return (true);
+		// if (inter.closest_obj != NULL)
+		// 	return (inter.closest_obj);
 		objs = objs->next;
 	}
-	return (false);
+	return (inter.closest_obj);
 }
 
 double		rt_calc_intesity(t_lights *light, t_ray r, t_vec l,
@@ -75,8 +75,8 @@ double		rt_calc_intesity(t_lights *light, t_ray r, t_vec l,
 		i += light->intensity * numerator / (vec_length(in->normal) *
 				vec_length(l));
 	if (in->closest_obj->specular > 0)
-		i += light->intensity * rt_calc_specularity(in->normal, l,
-				-r.direction, in->closest_obj->specular);
+		i += (light->intensity * rt_calc_specularity(in->normal, l,
+				-r.direction, in->closest_obj->specular));
 	return (i);
 }
 
@@ -85,7 +85,7 @@ double		rt_compute_lighting(t_objects *objs, t_lights *lights,
 {
 	double	i;
 	t_vec	l;
-
+	t_objects	*shadow_obj;
 	i = 0.0;
 	while (lights)
 	{
@@ -98,9 +98,11 @@ double		rt_compute_lighting(t_objects *objs, t_lights *lights,
 			else
 				l = lights->direction;
 			l = l / vec_length(l);
-			if (rt_point_in_shadow(objs, inter->hit, l, lights->type))
+			if ((shadow_obj = rt_point_in_shadow(objs, inter->hit, l, lights->type)) != NULL)
 			{
+				i += shadow_obj->transparency * rt_calc_intesity(lights, ray, l, inter);
 				lights = lights->next;
+				
 				continue;
 			}
 			i += rt_calc_intesity(lights, ray, l, inter);

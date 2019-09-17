@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_fields3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 21:23:35 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/17 12:34:35 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 20:40:11 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	pr_cut(t_objects *obj)
 bool	check_reflect_transparency(t_objects *obj)
 {
 	if (obj->reflection >= 0.5 && obj->transparency >= 0.5)
-		return (false_error("Chandge your reflection or transparency"));
+		return (false_error("Change your reflection or transparency"));
 	return (true);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 12:30:17 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 22:14:05 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,11 @@ typedef struct			s_rt
 typedef struct			s_flags
 {
 	bool				running;
-	bool				lmb_down;
-	bool				clear_canvas;
 	bool				state_changed;
 	bool				rot_x;
 	bool				rot_y;
 	bool				rot_x_min;
 	bool				rot_y_min;
-	bool				rot_z;
-	bool				rot_z_min;
 	bool				forward;
 	bool				backward;
 	bool				right;
@@ -165,9 +161,9 @@ t_vec					rt_canvas_to_viewport(int x, int y);
 double					rt_compute_lighting(t_objects *objs,
 							t_lights *lights, t_ray ray, t_intersect *inter);
 
-t_channel	rt_calc_ref_tran_color(t_channel local_color,
-			t_channel reflected_color, t_channel trancperency_color,
-			double r, double t);
+t_channel				rt_calc_ref_tran_color(t_channel local_color,
+							t_channel reflected_color,
+							t_channel trancperency_color, double r, double t);
 t_vec					rt_reflect_ray(t_vec normal, t_vec ray_dir);
 t_vec					rt_calc_normal(t_intersect *inter, t_ray ray);
 double					vec_length(t_vec v);
@@ -216,6 +212,9 @@ t_vec					moves(t_vec vec_rot, t_vec orient);
 void					ft_event_(t_sdls *app);
 bool					false_error(char *str);
 void					compose_obj(t_objects **obj);
+void					rt_cut_figure(t_intersect *inter, double *data, t_objects *obj,
+							t_ray ray);
+void					rt_sort_roots(double *roots, double *dist_range);
 
 t_channel				texture_mapping(t_rt *rtv, t_vec p, t_objects *ob);
 bool					load_textures(t_rt *rtv);
@@ -223,7 +222,7 @@ t_vec					normalize(t_vec vec);
 /**
 **Bomus color func
 **/
-void sepia_image(Uint32 *pixels, Uint32 *pixels_copy);
-void save_image(const char* file_name, SDL_Renderer* renderer);
-void AntiAliasing(Uint32 *pixels, int intensive);
+void					sepia_image(Uint32 *pixels, Uint32 *pixels_copy);
+void					save_image(const char* file_name, SDL_Renderer* renderer);
+void					AntiAliasing(Uint32 *pixels, int intensive);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 15:21:23 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 12:01:26 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/17 20:42:06 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,4 @@ void		rt_mainloop(t_rt *rt, Uint32 *pixels)
 t_vec		normalize(t_vec vec)
 {
 	return ((1.0 / vec_length(vec)) * vec);
-}
-
-bool		false_error(char *str)
-{
-	ft_putendl(str);
-	return (false);
 }

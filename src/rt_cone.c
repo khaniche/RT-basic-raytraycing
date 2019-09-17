@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:53:54 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 14:38:20 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/17 22:15:20 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,6 @@ t_vec			rt_calc_cone_normal(t_intersect *i, t_ray ray)
 	normal = i->hit - i->closest_obj->centre - i->closest_obj->k *
 		i->closest_obj->orient * m;
 	return (normal / vec_length(normal));
-}
-
-static void		cut_cone(t_intersect *inter, double *data, t_objects *cone,
-				t_ray ray)
-{
-	t_vec	oc;
-	t_vec	hit;
-
-	oc = ray.origin - cone->centre;
-	if (data[2] < inter->dist)
-	{
-		hit = data[2] * ray.direction + oc;
-		data[1] = dot(hit, cone->orient);
-		if (data[1] > cone->cut[0] && data[1] < cone->cut[1])
-		{
-			inter->dist = data[2];
-			inter->closest_obj = cone;
-		}
-	}
 }
 
 void			rt_intersect_ray_cone(t_ray ray, t_objects *cone,
@@ -62,7 +43,7 @@ void			rt_intersect_ray_cone(t_ray ray, t_objects *cone,
 	{
 		roots[0] = (-coeff.y + sqrt(data[0])) / (2 * coeff.x);
 		roots[1] = (-coeff.y - sqrt(data[0])) / (2 * coeff.x);
-		data[2] = rt_select_dist(roots, dist_range);
-		cut_cone(inter, data, cone, ray);
+		rt_sort_roots(roots, dist_range);
+		rt_cut_figure(inter, roots, cone, ray);
 	}
 }

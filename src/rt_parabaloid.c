@@ -6,7 +6,7 @@
 /*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 14:07:21 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/15 17:53:04 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/17 22:17:17 by khaniche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,6 @@ t_vec			rt_calc_par_normal(t_intersect *i, t_ray ray)
 	normal = i->hit - i->closest_obj->centre - i->closest_obj->radius -
 		(i->closest_obj->orient * m);
 	return (normal / vec_length(normal));
-}
-
-static void		cut_par(t_intersect *inter, double *data, t_objects *par,
-				t_ray ray)
-{
-	t_vec	oc;
-	t_vec	hit;
-
-	oc = ray.origin - par->centre;
-	if (data[2] < inter->dist)
-	{
-		hit = data[2] * ray.direction + oc;
-		data[1] = dot(hit, par->orient);
-		if (data[1] > par->cut[0] && data[1] < par->cut[1])
-		{
-			inter->dist = data[2];
-			inter->closest_obj = par;
-		}
-	}
 }
 
 void			rt_intersect_ray_par(t_ray ray, t_objects *par,
@@ -63,7 +44,7 @@ void			rt_intersect_ray_par(t_ray ray, t_objects *par,
 	{
 		roots[0] = (-coeff.y + sqrt(data[0])) / (coeff.x);
 		roots[1] = (-coeff.y - sqrt(data[0])) / (coeff.x);
-		data[2] = rt_select_dist(roots, dist_range);
-		cut_par(inter, data, par, ray);
+		rt_sort_roots(roots, dist_range);
+		rt_cut_figure(inter, roots, par, ray);
 	}
 }
