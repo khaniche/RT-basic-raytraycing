@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   rt_light.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 20:48:06 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 20:32:09 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/18 11:33:51 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_channel	rt_calc_ref_tran_color(t_channel local_color,
-t_channel reflected_color, t_channel trancperency_color, double r, double t)
+t_channel		rt_calc_ref_tran_color(t_color_trace color, double r, double t)
 {
-	local_color.r = local_color.r * (1 - t) * (1 - r) + reflected_color.r *
-	r + trancperency_color.r * t;
-	local_color.g = local_color.g * (1 - t) * (1 - r) + reflected_color.g *
-	r + trancperency_color.g * t;
-	local_color.b = local_color.b * (1 - t) * (1 - r) + reflected_color.b *
-	r + trancperency_color.b * t;
-	local_color = rt_enlightenment(local_color, 1);
-	return (local_color);
+	color.local_color.r = color.local_color.r * (1 - t) * (1 - r) +
+	color.reflected_color.r * r + color.transparency_color.r * t;
+	color.local_color.g = color.local_color.g * (1 - t) * (1 - r) +
+	color.reflected_color.g * r + color.transparency_color.g * t;
+	color.local_color.b = color.local_color.b * (1 - t) * (1 - r) +
+	color.reflected_color.b * r + color.transparency_color.b * t;
+	color.local_color = rt_enlightenment(color.local_color, 1);
+	return (color.local_color);
 }
 
-double		rt_calc_specularity(t_vec normal, t_vec light,
+double			rt_calc_specularity(t_vec normal, t_vec light,
 			t_vec v, double spec)
 {
 	double	i;
@@ -56,18 +55,16 @@ t_objects		*rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
 	while (objs)
 	{
 		rt_intersect_ray(ray, objs, &inter, dist_range);
-		// if (inter.closest_obj != NULL)
-		// 	return (inter.closest_obj);
 		objs = objs->next;
 	}
 	return (inter.closest_obj);
 }
 
-double		rt_calc_intesity(t_lights *light, t_ray r, t_vec l,
+double			rt_calc_intesity(t_lights *light, t_ray r, t_vec l,
 			t_intersect *in)
 {
-	double	numerator;
-	double	i;
+	double		numerator;
+	double		i;
 
 	i = 0;
 	numerator = dot(in->normal, l);
@@ -80,12 +77,13 @@ double		rt_calc_intesity(t_lights *light, t_ray r, t_vec l,
 	return (i);
 }
 
-double		rt_compute_lighting(t_objects *objs, t_lights *lights,
+double			rt_compute_lighting(t_objects *objs, t_lights *lights,
 			t_ray ray, t_intersect *inter)
 {
-	double	i;
-	t_vec	l;
+	double		i;
+	t_vec		l;
 	t_objects	*shadow_obj;
+
 	i = 0.0;
 	while (lights)
 	{
@@ -98,11 +96,12 @@ double		rt_compute_lighting(t_objects *objs, t_lights *lights,
 			else
 				l = lights->direction;
 			l = l / vec_length(l);
-			if ((shadow_obj = rt_point_in_shadow(objs, inter->hit, l, lights->type)) != NULL)
+			if ((shadow_obj = rt_point_in_shadow(objs,
+				inter->hit, l, lights->type)) != NULL)
 			{
-				i += shadow_obj->transparency * rt_calc_intesity(lights, ray, l, inter);
+				i += shadow_obj->transparency *
+					rt_calc_intesity(lights, ray, l, inter);
 				lights = lights->next;
-				
 				continue;
 			}
 			i += rt_calc_intesity(lights, ray, l, inter);

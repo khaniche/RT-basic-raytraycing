@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cut_and_sort_roots.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 22:14:29 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/17 22:15:11 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/18 12:53:39 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void			rt_cut_figure(t_intersect *inter, double *data, t_objects *obj,
 		}
 	}
 }
+
 void			rt_sort_roots(double *roots, double *dist_range)
 {
 	double	tmp;
-	
+
 	if (roots[0] < dist_range[0] || roots[0] > dist_range[1])
 		roots[0] = DBL_MAX;
 	if (roots[1] < dist_range[0] || roots[1] > dist_range[1])

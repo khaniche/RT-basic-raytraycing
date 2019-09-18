@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 22:14:05 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/18 12:55:57 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define VIEWPORT_WIDTH 1
 # define VIEWPORT_HEIGHT 1
 # define DIST_CAM_PP 1
-# define RECURTION_DEPTH 3
+# define RECURTION_DEPTH 2
 # define DEG_TO_RAD(angle) (M_PI * angle) / 180
 # define ROT_POWER DEG_TO_RAD(1);
 # define TEXTURES_COUNT 7
@@ -39,7 +39,7 @@
 typedef double			t_vec __attribute__((__ext_vector_type__(3)));
 
 enum					e_obj_type {OBJ_SPHERE, OBJ_PLANE, OBJ_CONE, OBJ_CYL,
-							OBJ_PAR};
+	OBJ_PAR};
 enum					e_light_type {LT_AMBIENT, LT_POINT, LT_DIRECT};
 
 typedef struct			s_channel
@@ -120,6 +120,7 @@ typedef struct			s_flags
 	bool				backward;
 	bool				right;
 	bool				left;
+	bool				lmb_down;
 }						t_flags;
 
 typedef struct			s_sdls
@@ -128,6 +129,14 @@ typedef struct			s_sdls
 	t_flags				flags;
 	SDL_Event			event;
 }						t_sdls;
+
+typedef struct			s_color_trace
+{
+	t_channel	local_color;
+	t_channel	color_texture;
+	t_channel	reflected_color;
+	t_channel	transparency_color;
+}						t_color_trace;
 
 void					ft_sdl_init(t_sdls *app);
 void					ft_sdl_clean(t_sdls *app);
@@ -161,9 +170,8 @@ t_vec					rt_canvas_to_viewport(int x, int y);
 double					rt_compute_lighting(t_objects *objs,
 							t_lights *lights, t_ray ray, t_intersect *inter);
 
-t_channel				rt_calc_ref_tran_color(t_channel local_color,
-							t_channel reflected_color,
-							t_channel trancperency_color, double r, double t);
+t_channel				rt_calc_ref_tran_color(t_color_trace color, double r,
+							double t);
 t_vec					rt_reflect_ray(t_vec normal, t_vec ray_dir);
 t_vec					rt_calc_normal(t_intersect *inter, t_ray ray);
 double					vec_length(t_vec v);
@@ -212,17 +220,20 @@ t_vec					moves(t_vec vec_rot, t_vec orient);
 void					ft_event_(t_sdls *app);
 bool					false_error(char *str);
 void					compose_obj(t_objects **obj);
-void					rt_cut_figure(t_intersect *inter, double *data, t_objects *obj,
-							t_ray ray);
+void					rt_cut_figure(t_intersect *inter, double *data,
+							t_objects *obj, t_ray ray);
 void					rt_sort_roots(double *roots, double *dist_range);
 
 t_channel				texture_mapping(t_rt *rtv, t_vec p, t_objects *ob);
 bool					load_textures(t_rt *rtv);
+bool					rt_find_closest_obj(t_ray ray, t_objects *objs,
+						t_intersect *inter, double *dist_range);
 t_vec					normalize(t_vec vec);
-/**
-**Bomus color func
-**/
+
+t_channel				noise_text(t_vec p, t_vec center);
+t_channel				wave_chechboard(t_vec p, t_vec center);
 void					sepia_image(Uint32 *pixels, Uint32 *pixels_copy);
-void					save_image(const char* file_name, SDL_Renderer* renderer);
-void					AntiAliasing(Uint32 *pixels, int intensive);
+void					save_image(const char *file_name,
+							SDL_Renderer *renderer);
+void					anti_aliasing(Uint32 *pixels, int intensive);
 #endif

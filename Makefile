@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+         #
+#    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/17 22:15:40 by khaniche         ###   ########.fr        #
+#    Updated: 2019/09/18 10:43:47 by dmolyboh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_FILES =		main.c \
 				pr_fields.c \
 				pr_fields2.c \
 				pr_fields3.c \
+				pr_fields4.c \
 				pr_lights.c \
 				pr_objs.c \
 				rt_threader.c\
@@ -56,7 +57,9 @@ SRC_FILES =		main.c \
 				compose_obj.c\
 				tx_texture.c\
 				bonus.c\
-				rt_cut_and_sort_roots.c
+				rt_cut_and_sort_roots.c\
+				rt_figure_defenetion.c\
+				bonus_.c
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \

@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:24:36 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/17 11:15:33 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/18 10:40:45 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,59 +43,14 @@ void				save_image(const char *file_name, SDL_Renderer *renderer)
 	SDL_FreeSurface(surface);
 }
 
-static t_channel	anti_aliasing_(Uint32 *pixels, t_channel tmp, int x)
-{
-	t_channel	rgb;
-
-	rgb.r = (((pixels[x + tmp.r + 1] >> 16) & 0xFF) + ((pixels[x
-		+ tmp.r] >> 16) & 0xFF) + ((pixels[x + tmp.r - 1] >> 16) &
-			0xFF) + ((pixels[x + tmp.b] >> 16) & 0xFF) +
-				((pixels[x + tmp.g + 1] >> 16) & 0xFF)) / 5;
-	rgb.g = (((pixels[x + tmp.r + 1] >> 8) & 0xFF) + ((pixels[x +
-		tmp.r] >> 8) & 0xFF) + ((pixels[x + tmp.r - 1] >> 8) & 0xFF)
-			+ ((pixels[x + tmp.b] >> 8) & 0xFF) + ((pixels[x +
-				tmp.g + 1] >> 8) & 0xFF)) / 5;
-	rgb.b = (((pixels[x + tmp.r + 1]) & 0xFF) + (pixels[x + tmp.r]
-		& 0xFF) + (pixels[x + tmp.r - 1] & 0xFF) + (pixels[x +
-			tmp.b] & 0xFF) + (pixels[x + tmp.g + 1] & 0xFF)) / 5;
-	return (rgb);
-}
-
-void				anti_aliasing(Uint32 *pixels, int intensive)
-{
-	int			i;
-	int			y;
-	int			x;
-	t_channel	rgb;
-	t_channel	tmp;
-
-	i = -1;
-	while (++i <= intensive)
-	{
-		y = 1;
-		while (++y < CH - 2)
-		{
-			tmp.r = (y) * CW;
-			tmp.g = (y + 1) * CW;
-			tmp.b = (y - 1) * CW;
-			x = 0;
-			while (++x < CW)
-			{
-				rgb = anti_aliasing_(pixels, tmp, x);
-				pixels[x + tmp.r] = rt_channel_color_to_uint(rgb);
-			}
-		}
-	}
-}
-
-t_channel			noise_text(t_vec p, t_objects *ob)
+t_channel			noise_text(t_vec p, t_vec center)
 {
 	t_channel	color;
 	Uint32		new_pixel;
 	int			u;
 	int			v;
 
-	p -= ob->centre;
+	p -= center;
 	p = normalize(p);
 	u = 0;
 	v = 0;
@@ -114,13 +69,13 @@ t_channel			noise_text(t_vec p, t_objects *ob)
 	return (color);
 }
 
-t_channel			wave_chechboard(t_vec p, t_objects *ob)
+t_channel			wave_chechboard(t_vec p, t_vec center)
 {
 	int			u;
 	int			v;
 	t_channel	color;
 
-	p -= ob->centre;
+	p -= center;
 	p = normalize(p);
 	u = 0;
 	v = 0;

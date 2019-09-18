@@ -3,114 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   rt_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 22:23:04 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/18 12:45:02 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		rt_intersect_ray(t_ray ray, t_objects *objs, t_intersect *inter,
-				double *dist_range)
+t_channel	find_color_texture(t_rt *rt, t_intersect inter, double i)
 {
-	if (objs->type == OBJ_SPHERE)
-		rt_intersect_ray_sphere(ray, objs, inter, dist_range);
-	else if (objs->type == OBJ_PLANE)
-		rt_intersect_ray_plane(ray, objs, inter, dist_range);
-	else if (objs->type == OBJ_CYL)
-		rt_intersect_ray_cylinder(ray, objs, inter, dist_range);
-	else if (objs->type == OBJ_CONE)
-		rt_intersect_ray_cone(ray, objs, inter, dist_range);
-	else if (objs->type == OBJ_PAR)
-		rt_intersect_ray_par(ray, objs, inter, dist_range);
-}
+	t_channel		tex_color;
 
-t_vec		rt_calc_normal(t_intersect *inter, t_ray ray)
-{
-	if (inter->closest_obj->type == OBJ_SPHERE)
-		return (rt_calc_sphere_normal(inter));
-	else if (inter->closest_obj->type == OBJ_PLANE)
-		return (rt_calc_plane_normal(inter, ray));
-	else if (inter->closest_obj->type == OBJ_CYL)
-		return (rt_calc_cylinder_normal(inter, ray));
-	else if (inter->closest_obj->type == OBJ_CONE)
-		return (rt_calc_cone_normal(inter, ray));
-	else if (inter->closest_obj->type == OBJ_PAR)
-		return (rt_calc_par_normal(inter, ray));
-	else
-		return (0);
-}
-
-bool		rt_find_closest_obj(t_ray ray, t_objects *objs, t_intersect *inter,
-				double *dist_range)
-{
-	inter->closest_obj = NULL;
-	inter->dist = DBL_MAX;
-	while (objs)
+	if (inter.closest_obj->texture > -1 &&
+	inter.closest_obj->texture < TEXTURES_COUNT)
 	{
-		rt_intersect_ray(ray, objs, inter, dist_range);
-		objs = objs->next;
+		tex_color = texture_mapping(rt, inter.hit, inter.closest_obj);
+		tex_color = rt_enlightenment(tex_color, i);
 	}
-	return (inter->closest_obj != NULL);
+	else if (inter.closest_obj->texture > -1 &&
+		inter.closest_obj->texture < (TEXTURES_COUNT + 2))
+	{
+		if (inter.closest_obj->texture == (TEXTURES_COUNT + 1))
+		{
+			tex_color = noise_text(inter.hit, inter.closest_obj->centre);
+		}
+		else
+		{
+			tex_color = wave_chechboard(inter.hit, inter.closest_obj->centre);
+		}
+	}
+	else
+		tex_color = rt_enlightenment(inter.closest_obj->color, i);
+	return (tex_color);
+}
+
+void		init_color_trcae(t_color_trace *color)
+{
+	color->transparency_color = (t_channel){0, 0, 0};
+	color->reflected_color = (t_channel){0, 0, 0};
 }
 
 t_channel	rt_trace_ray(t_ray ray, t_rt *rt,
 double *dist_range, int depth)
 {
-	t_channel	local_color;
-	t_channel	color_texture;
-	t_channel	reflected_color;
-	t_channel	transparency_color;
-	t_intersect	inter;
-	double		i;
+	t_color_trace	color;
+	t_intersect		inter;
+	double			i;
 
 	if (!rt_find_closest_obj(ray, rt->objs, &inter, dist_range))
 		return ((t_channel) {0, 0, 0});
+	init_color_trcae(&color);
 	inter.hit = ray.origin + inter.dist * ray.direction;
 	inter.normal = rt_calc_normal(&inter, ray);
 	i = rt_compute_lighting(rt->objs, rt->lights, ray, &inter);
-	if (inter.closest_obj->texture > -1 &&
-	inter.closest_obj->texture < TEXTURES_COUNT)
-	{
-		color_texture = texture_mapping(rt, inter.hit, inter.closest_obj);
-		local_color = rt_enlightenment(color_texture, i);
-	}
-	else
-		local_color = rt_enlightenment(inter.closest_obj->color, i);
+	color.local_color = find_color_texture(rt, inter, i);
 	if (depth <= 0 || (inter.closest_obj->reflection <= 0
 	&& inter.closest_obj->transparency <= 0))
-		return (local_color);
+		return (color.local_color);
 	ray.origin = inter.hit;
 	if (inter.closest_obj->transparency > 0)
-	{
-		transparency_color = rt_trace_ray(ray, rt,
+		color.transparency_color = rt_trace_ray(ray, rt,
 			(double[2]) {0.001, DBL_MAX}, depth - 1);
-	}
-	else
-		transparency_color = (t_channel){0, 0, 0};
 	ray.direction = rt_reflect_ray(inter.normal, -ray.direction);
 	ray.origin = inter.hit;
 	if (inter.closest_obj->reflection > 0)
-	{
-		reflected_color = rt_trace_ray(ray, rt,
+		color.reflected_color = rt_trace_ray(ray, rt,
 			(double[2]) {0.001, DBL_MAX}, depth - 1);
-	}
-	else
-		reflected_color = (t_channel){0, 0, 0};
-	return (rt_calc_ref_tran_color(local_color, reflected_color,
-transparency_color, inter.closest_obj->reflection,
-		inter.closest_obj->transparency));
+	return (rt_calc_ref_tran_color(color, inter.closest_obj->reflection,
+			inter.closest_obj->transparency));
 }
 
 void		*rt_threaded_loop(void *r)
 {
-	t_rt		*rt;
-	t_ray		ray;
-	t_channel	color;
-	int			y;
-	double		dist_range[2];
+	t_rt			*rt;
+	t_ray			ray;
+	t_channel		color;
+	int				y;
+	double			dist_range[2];
 
 	rt = (t_rt *)r;
 	dist_range[0] = 1;

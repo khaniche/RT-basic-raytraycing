@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_fields3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 21:23:35 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/17 20:40:11 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/18 10:42:20 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,4 @@ bool	check_reflect_transparency(t_objects *obj)
 	if (obj->reflection >= 0.5 && obj->transparency >= 0.5)
 		return (false_error("Change your reflection or transparency"));
 	return (true);
-}
-
-void	check_light(t_lights **lg)
-{
-	t_lights	*lig;
-	bool		ambient;
-
-	ambient = false;
-	lig = *lg;
-	while (lig->next)
-	{
-		if (lig->type == LT_AMBIENT)
-			ambient = true;
-		lig = lig->next;
-	}
-	if (ambient == false)
-	{
-		lig->next = (t_lights *)malloc(sizeof(t_lights));
-		lig = lig->next;
-		lig->type = LT_AMBIENT;
-		lig->intensity = 0.1;
-		lig->next = NULL;
-	}
 }
