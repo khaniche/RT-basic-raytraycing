@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 20:48:06 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/18 11:33:51 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 12:53:17 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 t_channel		rt_calc_ref_tran_color(t_color_trace color, double r, double t)
 {
 	color.local_color.r = color.local_color.r * (1 - t) * (1 - r) +
-	color.reflected_color.r * r + color.transparency_color.r * t;
+		color.reflected_color.r * r + color.transparency_color.r * t;
 	color.local_color.g = color.local_color.g * (1 - t) * (1 - r) +
-	color.reflected_color.g * r + color.transparency_color.g * t;
+		color.reflected_color.g * r + color.transparency_color.g * t;
 	color.local_color.b = color.local_color.b * (1 - t) * (1 - r) +
-	color.reflected_color.b * r + color.transparency_color.b * t;
+		color.reflected_color.b * r + color.transparency_color.b * t;
 	color.local_color = rt_enlightenment(color.local_color, 1);
 	return (color.local_color);
 }
@@ -40,7 +40,7 @@ double			rt_calc_specularity(t_vec normal, t_vec light,
 }
 
 t_objects		*rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
-								int l_type)
+								t_lights l)
 {
 	double		dist_range[2];
 	t_intersect	inter;
@@ -51,7 +51,7 @@ t_objects		*rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
 	inter.dist = DBL_MAX;
 	inter.closest_obj = NULL;
 	dist_range[0] = 0.0001;
-	dist_range[1] = (l_type == LT_POINT) ? 1 : DBL_MAX;
+	dist_range[1] = (l.type == LT_POINT) ? vec_length(point - l.position): DBL_MAX;
 	while (objs)
 	{
 		rt_intersect_ray(ray, objs, &inter, dist_range);
@@ -97,10 +97,11 @@ double			rt_compute_lighting(t_objects *objs, t_lights *lights,
 				l = lights->direction;
 			l = l / vec_length(l);
 			if ((shadow_obj = rt_point_in_shadow(objs,
-				inter->hit, l, lights->type)) != NULL)
+				inter->hit, l, *lights)) != NULL)
 			{
-				i += shadow_obj->transparency *
-					rt_calc_intesity(lights, ray, l, inter);
+				if (shadow_obj->transparency > 0)
+					i += shadow_obj->transparency *
+						rt_calc_intesity(lights, ray, l, inter);
 				lights = lights->next;
 				continue;
 			}

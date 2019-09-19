@@ -3,6 +3,7 @@
 		"rt.h": "c",
 		"float.h": "c",
 		"intrin.h": "c",
-		"complex": "c"
+		"complex": "c",
+		"algorithm": "c"
 	}
 }

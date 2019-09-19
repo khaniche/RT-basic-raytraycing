@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/18 12:45:02 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:23:51 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ double *dist_range, int depth)
 		color.transparency_color = rt_trace_ray(ray, rt,
 			(double[2]) {0.001, DBL_MAX}, depth - 1);
 	ray.direction = rt_reflect_ray(inter.normal, -ray.direction);
-	ray.origin = inter.hit;
 	if (inter.closest_obj->reflection > 0)
 		color.reflected_color = rt_trace_ray(ray, rt,
 			(double[2]) {0.001, DBL_MAX}, depth - 1);
@@ -96,6 +95,7 @@ void		*rt_threaded_loop(void *r)
 			ray.direction = rt_canvas_to_viewport(rt->x_start, y);
 			ray.direction = rt_rotate_camera(&(rt->camera), ray.direction);
 			color = rt_trace_ray(ray, rt, dist_range, RECURTION_DEPTH);
+			color = cartoon(color);
 			ft_pp_img(rt->pixels, rt->x_start + CW / 2, CH / 2 - y,
 				rt_channel_color_to_uint(color));
 		}

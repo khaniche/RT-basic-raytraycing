@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_plane.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 17:52:26 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 15:28:40 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/19 09:38:56 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_vec	rt_calc_plane_normal(t_intersect *inter, t_ray ray)
 	return (-inter->closest_obj->orient);
 }
 
-void	rt_intersect_ray_plane(t_ray ray, t_objects *plane,
-					t_intersect *inter, double *dist_range)
+void rt_intersect_ray_plane(t_ray ray, t_objects *plane,
+	t_intersect *inter, double *dist_range)
 {
-	double	t;
-	double	denominator;
-	t_vec	oc;
-	t_vec	hitpoint;
+	double t;
+	double denominator;
+	t_vec oc;
+	t_vec hitpoint;
 
 	denominator = dot(plane->orient, ray.direction);
 	if (denominator != 0)
@@ -37,13 +37,18 @@ void	rt_intersect_ray_plane(t_ray ray, t_objects *plane,
 		t = -dot(oc, plane->orient) / denominator;
 		if (t > dist_range[0] && t < dist_range[1] && t < inter->dist)
 		{
-			t = -dot(oc, plane->orient) / dot(ray.direction, plane->orient);
-			hitpoint = t * ray.direction + oc;
-			if (vec_length(hitpoint) < plane->radius)
+			if (plane->radius > 0)
 			{
-				inter->dist = t;
-				inter->closest_obj = plane;
+				t = -dot(oc, plane->orient) / dot(ray.direction, plane->orient);
+				hitpoint = t * ray.direction + oc;
+				if (vec_length(hitpoint) < plane->radius)
+					inter->dist = t;
+				else
+					return ;
 			}
+			else
+				inter->dist = t;
+			inter->closest_obj = plane;
 		}
 	}
 }

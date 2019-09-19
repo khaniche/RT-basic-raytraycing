@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/18 12:55:57 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:36:08 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define VIEWPORT_WIDTH 1
 # define VIEWPORT_HEIGHT 1
 # define DIST_CAM_PP 1
-# define RECURTION_DEPTH 2
-# define DEG_TO_RAD(angle) (M_PI * angle) / 180
+# define RECURTION_DEPTH 9
+# define DEG_TO_RAD(angle) (M_PI * (angle)) / 180
 # define ROT_POWER DEG_TO_RAD(1);
 # define TEXTURES_COUNT 7
 
@@ -205,9 +205,10 @@ bool					pr_reflection(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_radius(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_transparency(const JSON_Object *j_ob,
 						t_objects *obj);
-void					pr_cut(t_objects *obj);
+bool					pr_cut(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_texture(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_compose(const JSON_Object *j_ob, t_objects *obj);
+bool					pr_radius_pl(const JSON_Object *j_ob, t_objects *obj);
 bool					check_reflect_transparency(t_objects *obj);
 void					check_light(t_lights **lg);
 
@@ -236,4 +237,10 @@ void					sepia_image(Uint32 *pixels, Uint32 *pixels_copy);
 void					save_image(const char *file_name,
 							SDL_Renderer *renderer);
 void					anti_aliasing(Uint32 *pixels, int intensive);
+
+double					deg_to_rad(double angle);
+t_channel				disruption_1(t_vec p, t_vec center);
+t_channel				disruption_2(t_vec p,  t_vec center);
+t_channel				disruption_3(t_vec p, t_vec center);
+t_channel				cartoon(t_channel col);
 #endif

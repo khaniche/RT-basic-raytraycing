@@ -6,7 +6,7 @@
 #    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/18 10:43:47 by dmolyboh         ###   ########.fr        #
+#    Updated: 2019/09/18 17:33:06 by dmolyboh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,43 +23,44 @@ LIB = 	$(addprefix $(LIBFT_DIR), $(LIBFT_NAME)) \
 		$(addprefix $(LIBPARSON_DIR), $(LIBPARSON_NAME)) 
 
 
-SRC_FILES =		main.c \
-				error_handler.c \
-				window.c \
-				sdl_init.c \
-				sdl_clean.c \
-				cn_canvas.c \
-				cn_mainloop.c \
-				draw_line.c \
-				main_loop.c \
-				rt_main.c \
-				rt_color.c \
-				rt_light.c \
-				rt_sphere.c \
-				rt_plane.c \
-				rt_cylinder.c \
-				rt_cone.c \
-				rt_utils.c \
-				rt_vec_op_utils.c \
-				rt_parse.c \
-				rt_clean.c \
-				rt_rotation.c \
-				pr_fields.c \
-				pr_fields2.c \
-				pr_fields3.c \
-				pr_fields4.c \
-				pr_lights.c \
-				pr_objs.c \
-				rt_threader.c\
+SRC_FILES =		cn_mainloop.c\
 				key_hooks.c\
-				matrix_rotation.c\
-				rt_parabaloid.c\
-				compose_obj.c\
-				tx_texture.c\
-				bonus.c\
+				pr_fields2.c\
+				pr_objs.c\
+				rt_cone.c\
+				rt_light.c\
+				rt_plane.c\
+				rt_tx_texture.c\
+				sdl_clean.c\
+				anti_aliasing.c\
+				color_disruptions.c\
+				main.c\
+				pr_fields3.c\
+				rt_clean.c\
 				rt_cut_and_sort_roots.c\
+				rt_main.c\
+				rt_rotation.c\
+				rt_utils.c\
+				sdl_init.c\
+				cam_matrix_rotation.c\
+				draw_line.c\
+				main_loop.c\
+				pr_fields4.c\
+				rt_color.c\
+				rt_cylinder.c\
+				rt_parabaloid.c\
+				rt_sphere.c\
+				rt_vec_op_utils.c\
+				window.c\
+				cn_canvas.c\
+				er_error_handler.c\
+				pr_fields.c\
+				pr_lights.c\
+				rt_compose_obj.c\
 				rt_figure_defenetion.c\
-				bonus_.c
+				rt_parse.c\
+				rt_threader.c\
+				rt_visual_effects.c
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \

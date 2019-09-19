@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 21:23:35 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/18 10:42:20 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:17:12 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,20 @@ bool	pr_compose(const JSON_Object *j_ob, t_objects *obj)
 	return (true);
 }
 
-void	pr_cut(t_objects *obj)
+bool	pr_cut(const JSON_Object *j_ob, t_objects *obj)
 {
-	obj->cut[2] = 0;
-	if ((obj->cut[1] == 0 && obj->cut[0] == 0)
-		|| (obj->cut[0] > obj->cut[1]) || obj->cut[1] == obj->cut[0])
+	if (json_object_has_value_of_type(j_ob, "cut", JSONArray) == false)
 	{
+		obj->cut[2] = 0;
 		obj->cut[0] = -2147483648;
 		obj->cut[1] = 2147483647;
+		return (true);
 	}
+	if (pr_vec_field(j_ob, "cut", &(obj->cut)) == false)
+		return (false);
+	if (obj->cut[1] <=  obj->cut[0])
+		return (false);
+	return (true);
 }
 
 bool	check_reflect_transparency(t_objects *obj)

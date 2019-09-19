@@ -1,0 +1,16 @@
+// t_channel			wave_chechboard(t_vec p, t_vec center)
+// {
+// 	int			u;
+// 	int			v;
+// 	t_channel	color;
+
+// 	p -= center;
+// 	p = normalize(p);
+// 	u = 0;
+// 	v = 0;
+// 	u = ((cos(p.x * M_PI * 10) + 1) * 10) * 4;
+
+// 	color = (t_channel){(u) & 0xFF, (u ) & 0xFF, (u >> 16) & 0xFF};
+
+// 	return (color);
+// }
