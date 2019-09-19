@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 17:52:26 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 09:38:56 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:09:17 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,31 @@ t_vec	rt_calc_plane_normal(t_intersect *inter, t_ray ray)
 	return (-inter->closest_obj->orient);
 }
 
-void rt_intersect_ray_plane(t_ray ray, t_objects *plane,
+void	rt_intersect_ray_plane(t_ray ray, t_objects *plane,
 	t_intersect *inter, double *dist_range)
 {
-	double t;
-	double denominator;
-	t_vec oc;
-	t_vec hitpoint;
+	double	d[2];
+	t_vec	oc[2];
 
-	denominator = dot(plane->orient, ray.direction);
-	if (denominator != 0)
+	d[1] = dot(plane->orient, ray.direction);
+	if (d[1] != 0)
 	{
-		oc = ray.origin - plane->centre;
-		t = -dot(oc, plane->orient) / denominator;
-		if (t > dist_range[0] && t < dist_range[1] && t < inter->dist)
+		oc[0] = ray.origin - plane->centre;
+		d[0] = -dot(oc[0], plane->orient) / d[1];
+		if (d[0] > dist_range[0] && d[0] < dist_range[1] && d[0] < inter->dist)
 		{
 			if (plane->radius > 0)
 			{
-				t = -dot(oc, plane->orient) / dot(ray.direction, plane->orient);
-				hitpoint = t * ray.direction + oc;
-				if (vec_length(hitpoint) < plane->radius)
-					inter->dist = t;
+				d[0] = -dot(oc[0], plane->orient) /
+				dot(ray.direction, plane->orient);
+				oc[1] = d[0] * ray.direction + oc[0];
+				if (vec_length(oc[1]) < plane->radius)
+					inter->dist = d[0];
 				else
 					return ;
 			}
 			else
-				inter->dist = t;
+				inter->dist = d[0];
 			inter->closest_obj = plane;
 		}
 	}

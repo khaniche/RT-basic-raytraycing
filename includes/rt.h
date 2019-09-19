@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 16:36:08 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:46:21 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,10 @@ typedef struct			s_sdls
 
 typedef struct			s_color_trace
 {
-	t_channel	local_color;
-	t_channel	color_texture;
-	t_channel	reflected_color;
-	t_channel	transparency_color;
+	t_channel			local_color;
+	t_channel			color_texture;
+	t_channel			reflected_color;
+	t_channel			transparency_color;
 }						t_color_trace;
 
 void					ft_sdl_init(t_sdls *app);
@@ -240,7 +240,7 @@ void					anti_aliasing(Uint32 *pixels, int intensive);
 
 double					deg_to_rad(double angle);
 t_channel				disruption_1(t_vec p, t_vec center);
-t_channel				disruption_2(t_vec p,  t_vec center);
+t_channel				disruption_2(t_vec p, t_vec center);
 t_channel				disruption_3(t_vec p, t_vec center);
 t_channel				cartoon(t_channel col);
 #endif

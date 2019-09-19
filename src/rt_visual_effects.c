@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:24:36 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/19 16:27:51 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:13:54 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,23 @@ void				sepia_image(Uint32 *pixels, Uint32 *pixels_copy)
 	}
 }
 
+/*
+**Uint32 rgb;
+**rgb = 0.299 * col.r + 0.587 * col.g + 0.114 * col.b;
+**col.r = rgb;
+**col.g = rgb;
+**col.b = rgb;
+**col.r = (255 - rgb) < 0 ? 0 : (255 - rgb);
+**col.g = (255 - rgb) < 0 ? 0 : (255 - rgb);
+**col.b = (255 - rgb) < 0 ? 0 : (255 - rgb);
+**Можно разбить эфеты белого
+**Эффекты серого
+*/
+
 t_channel			cartoon(t_channel col)
 {
-	// Uint32 rgb;
-
-	// rgb = 0.299 * col.r + 0.587 * col.g + 0.114 * col.b;
-	// col.r = rgb;
-	// col.g = rgb;
-	// col.b = rgb;
-	// col.r = (255 - rgb) < 0 ? 0 : (255 - rgb);
-	// col.g = (255 - rgb) < 0 ? 0 : (255 - rgb);
-	// col.b = (255 - rgb) < 0 ? 0 : (255 - rgb);
-	
 	col.r = (col.r / 20) * 20;
 	col.g = (col.g / 20) * 20;
 	col.b = (col.b / 20) * 20;
 	return (col);
 }
-
-/**
-**Можно разбить эфеты белого 
-**Эффекты серого
-**/

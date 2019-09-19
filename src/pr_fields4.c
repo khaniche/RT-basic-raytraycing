@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 10:41:47 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/18 10:41:53 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:57:59 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ void	check_light(t_lights **lg)
 		lig->intensity = 0.1;
 		lig->next = NULL;
 	}
+}
+
+bool	pr_radius_pl(const JSON_Object *j_ob, t_objects *obj)
+{
+	if (!json_object_has_value_of_type(j_ob, "radius", JSONNumber))
+		obj->radius = -1;
+	obj->radius = json_object_get_number(j_ob, "radius");
+	return (true);
 }

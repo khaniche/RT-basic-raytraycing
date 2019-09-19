@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 20:48:06 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 12:53:17 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:11:14 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_objects		*rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
 	inter.dist = DBL_MAX;
 	inter.closest_obj = NULL;
 	dist_range[0] = 0.0001;
-	dist_range[1] = (l.type == LT_POINT) ? vec_length(point - l.position): DBL_MAX;
+	dist_range[1] = (l.type == LT_POINT) ?
+	vec_length(point - l.position) : DBL_MAX;
 	while (objs)
 	{
 		rt_intersect_ray(ray, objs, &inter, dist_range);

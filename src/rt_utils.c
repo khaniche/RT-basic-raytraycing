@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 15:21:23 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 13:42:48 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:14:25 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,7 @@ t_vec		rt_reflect_ray(t_vec normal, t_vec ray_dir)
 	return (2 * normal * dot(normal, ray_dir) - ray_dir);
 }
 
-double deg_to_rad(double angle)
-{
-	return ((M_PI * angle) / 180);
-}
-
 t_vec		normalize(t_vec vec)
 {
 	return ((1.0 / vec_length(vec)) * vec);
-}
-
-void				save_image(const char *file_name, SDL_Renderer *renderer)
-{
-	SDL_Surface *surface;
-
-	surface = SDL_CreateRGBSurface(0, CW, CH, 32, 0, 0, 0, 0);
-	SDL_RenderReadPixels(renderer, NULL, surface->format->format,
-	surface->pixels, surface->pitch);
-	IMG_SavePNG(surface, file_name);
-	SDL_FreeSurface(surface);
 }

@@ -6,21 +6,11 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 16:15:29 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:00:07 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void print(t_objects *ob)
-{
-	printf("center %f %f %f\n", ob->centre.x, ob->centre.y, ob->centre.z);
-	printf("orient %f %f %f\n", ob->orient.x, ob->orient.y, ob->orient.z);
-	printf("cut %f %f %f\n", ob->cut.x, ob->cut.y, ob->cut.z);
-	printf("color %d %d %d\n", ob->color.r, ob->color.g, ob->color.b);
-	printf("type %d, trans %f, ref %f\n", ob->type, ob->transparency, ob->reflection);
-	printf("texture %d, radius %f, compose %d, k %f\n", ob->texture, ob->radius, ob->compose, ob->k);
-}
 
 bool	pr_obj_sphere(const JSON_Object *j_ob, t_objects *sphere)
 {
@@ -50,9 +40,8 @@ bool	pr_obj_plane(const JSON_Object *j_ob, t_objects *plane)
 		!check_reflect_transparency(plane))
 		return (false);
 	pr_radius_pl(j_ob, plane);
-	print(plane);
 	if (vec_length(plane->orient) != 0)
-		plane->orient /= vec_length(plane->orient); //   Hb
+		plane->orient /= vec_length(plane->orient);
 	else
 		plane->orient = 1;
 	return (true);
@@ -75,7 +64,6 @@ bool	pr_obj_cyl(const JSON_Object *j_ob, t_objects *cyl)
 		cyl->orient /= vec_length(cyl->orient);
 	else
 		cyl->orient = 1;
-	print(cyl);
 	return (true);
 }
 

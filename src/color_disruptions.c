@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:17:45 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/19 13:41:36 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 16:56:20 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,16 @@ t_channel			noise_text(t_vec p, t_vec center)
 	return (color);
 }
 
-t_channel			wave_chechboard(t_vec p,  t_vec center)
+t_channel			wave_chechboard(t_vec p, t_vec center)
 {
 	int			u;
 	int			v;
 	t_channel	color;
 	t_channel	color1;
-	t_channel	color_Rez;
+	t_channel	color_rez;
 
 	p -= center;
 	p = normalize(p);
-	u = 0;
-	v = 0;
 	u = ((sin(p.x * 2 * M_PI * 6)) * 10) * 4;
 	v = ((cos(p.y * 2 * M_PI * 5)) * 10) * 4;
 	color = (t_channel){(u >> 16) & 0xFF, (u >> 8), (u & 0xFF)};
@@ -63,94 +61,8 @@ t_channel			wave_chechboard(t_vec p,  t_vec center)
 	else
 		color1 = (t_channel){255, 255, 255};
 	if (color1.r == color.r)
-		color_Rez =  (t_channel){0, 0, 0};
+		color_rez = (t_channel){0, 0, 0};
 	else
-	color_Rez = (t_channel){255, 255, 255};
-	return (color_Rez);
-}
-
-t_channel			disruption_1(t_vec p, t_vec center)
-{
-	int			u;
-	int			v;
-	t_channel	color;
-
-	p -= center;
-	p = normalize(p);
-	u = 0;
-	v = 0;
-	u = ((sin(p.x * M_PI * 1) + 1) * 10) * 4;
-	u *= ((cos(p.x * M_PI * 1) + 1) * 10) * 4;
-	color = (t_channel){(u ) & 0xFF, (u >> 2 ) & 0xFF, (u >> 4) & 0xFF};
-
-	return (color);
-}
-
-t_channel			disruption_2(t_vec p, t_vec center)
-{
-	int			u;
-	int			v;
-	t_channel	color;
-
-	p -= center;
-	p = normalize(p);
-	u = 0;
-	v = 0;
-	u = ((sin(p.x * 2 * M_PI * 5) + 1) * 10);
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	v = (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	if (v)
-		u *= v;
-	color = (t_channel){(u >> 16) & 0xFF, (u) & 0xFF, ((u) & 0xFF)};
-	if (color.r == 0 && color.b == 0 && color.g == 0)
-		color = (t_channel){0, 0, 0};
-	return (color);
-}
-
-t_channel			disruption_3(t_vec p, t_vec center)
-{
-	int			u;
-	int			v;
-	t_channel	color;
-
-	p -= center;
-	p = normalize(p);
-	u = 0;
-	v = 0;
-	u = ((cos(p.x * M_PI * 10) + 1) * 10) * 10;
-
-	color = (t_channel){(u >> 5) & 0xFF, (u ) & 0xFF, (u >>2) & 0xFF};
-
-	return (color);
-}
-
-t_channel			disruption_4(t_vec p, t_vec center)
-{
-	int			u;
-	int			v;
-	t_channel	color;
-
-	p -= center;
-	p = normalize(p);
-	u = 0;
-	v = 0;
-	u = ((sin(p.x * 2 * M_PI * 5) + 1) * 10);
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	u += (sin(p.x * 2 * M_PI * 5) + 1) * 10;
-	v = (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	v += (cos(p.y * 2 * M_PI * 5) + 1) * 10;
-	if (v)
-		u *= v;
-	color = (t_channel){(u << 2) & 0xFF, (u >> 8) & 0xFF, ((u  >> 16)& 0xFF)};
-	if (color.r == 0 && color.b == 0 && color.g == 0)
-		color = (t_channel){0, 255, 255};
-	return (color);
+		color_rez = (t_channel){255, 255, 255};
+	return (color_rez);
 }

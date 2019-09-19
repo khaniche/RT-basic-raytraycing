@@ -6,7 +6,7 @@
 #    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/18 17:33:06 by dmolyboh         ###   ########.fr        #
+#    Updated: 2019/09/19 17:12:26 by dmolyboh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_FILES =		cn_mainloop.c\
 				rt_main.c\
 				rt_rotation.c\
 				rt_utils.c\
+				rt_utils_.c\
 				sdl_init.c\
 				cam_matrix_rotation.c\
 				draw_line.c\
