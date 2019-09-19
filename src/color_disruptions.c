@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 17:17:45 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/19 16:56:20 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 18:45:21 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,33 @@ t_channel			noise_text(t_vec p, t_vec center)
 	return (color);
 }
 
-t_channel			wave_chechboard(t_vec p, t_vec center)
+t_channel   wave_chechboard(t_vec p,  t_vec center)
 {
-	int			u;
-	int			v;
-	t_channel	color;
-	t_channel	color1;
-	t_channel	color_rez;
+ double   u,v;
+ double   uv;
+ t_channel color;
+ (void)center;
+ // t_channel color1;
+ // t_channel color_Rez;
 
-	p -= center;
-	p = normalize(p);
-	u = ((sin(p.x * 2 * M_PI * 6)) * 10) * 4;
-	v = ((cos(p.y * 2 * M_PI * 5)) * 10) * 4;
-	color = (t_channel){(u >> 16) & 0xFF, (u >> 8), (u & 0xFF)};
-	if (color.r <= 50 && color.b <= 50 && color.g <= 50)
-		color = (t_channel){0, 0, 0};
-	else
-		color = (t_channel){255, 255, 255};
-	color1 = (t_channel){(v >> 16) & 0xFF, (v >> 8), (v & 0xFF)};
-	if (color1.r <= 50 && color1.b <= 50 && color1.g <= 50)
-		color1 = (t_channel){0, 0, 0};
-	else
-		color1 = (t_channel){255, 255, 255};
-	if (color1.r == color.r)
-		color_rez = (t_channel){0, 0, 0};
-	else
-		color_rez = (t_channel){255, 255, 255};
-	return (color_rez);
+ // p -= center;
+ // p = normalize(p);
+ u = sin(10.0 * M_PI * p.x) + 0.5;
+ v = sin(10.0 * M_PI * p.y) + 0.5;
+ uv = floor(u + v / 2.0);
+ color = (t_channel){255 * uv, 255 * uv, 255 * uv};
+ // if (color.r <= 50 && color.b <= 50 && color.g <= 50)
+ //  color = (t_channel){0, 0, 0};
+ // else
+ //  color = (t_channel){255, 255, 255};
+ // color1 = (t_channel){(v >> 16) & 0xFF, (v >> 8), (v & 0xFF)};
+ // if (color1.r <= 50 && color1.b <= 50 && color1.g <= 50)
+ //  color1 = (t_channel){0, 0, 0};
+ // else
+ //  color1 = (t_channel){255, 255, 255};
+ // if (color1.r == color.r)
+ //  color_Rez =  (t_channel){0, 0, 0};
+ // else
+ // color_Rez = (t_channel){255, 255, 255};
+ return (color);
 }

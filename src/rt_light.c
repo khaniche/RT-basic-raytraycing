@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 20:48:06 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 17:11:14 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 20:31:22 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,119 @@ double			rt_calc_specularity(t_vec normal, t_vec light,
 	return (i);
 }
 
+
+
 t_objects		*rt_point_in_shadow(t_objects *objs, t_vec point, t_vec light,
 								t_lights l)
 {
 	double		dist_range[2];
 	t_intersect	inter;
 	t_ray		ray;
+	t_objects	*obstacle_obj;
+	double		obstacle_dist;
+	t_objects	*transp_obj;
+	double		transp_dist;
 
 	ray.origin = point;
 	ray.direction = light;
-	inter.dist = DBL_MAX;
-	inter.closest_obj = NULL;
+
+	obstacle_dist = DBL_MAX;
+	obstacle_obj = NULL;
+	transp_dist = DBL_MAX;
+	transp_obj = NULL;
 	dist_range[0] = 0.0001;
 	dist_range[1] = (l.type == LT_POINT) ?
 	vec_length(point - l.position) : DBL_MAX;
 	while (objs)
 	{
+		inter.dist = DBL_MAX;
+		inter.closest_obj = NULL;
 		rt_intersect_ray(ray, objs, &inter, dist_range);
+		if (inter.closest_obj)
+		{
+			if (inter.closest_obj->transparency < 0)
+			{
+				if (obstacle_obj)
+				{
+					
+					if (obstacle_dist < inter.dist)
+					{
+						obstacle_dist = inter.dist;
+						obstacle_obj = inter.closest_obj;
+					}
+				}
+				else
+				{
+					obstacle_dist = inter.dist;
+					obstacle_obj = inter.closest_obj;
+				}
+			}
+			if (inter.closest_obj->transparency > 0)
+			{
+				if (transp_obj)
+				{
+					if (transp_dist < inter.dist)
+					{
+						transp_dist = inter.dist;
+						transp_obj = inter.closest_obj;
+					}
+				}
+				else
+				{
+					transp_dist = inter.dist;
+					transp_obj = inter.closest_obj;
+				}
+			}
+		}
 		objs = objs->next;
 	}
-	return (inter.closest_obj);
+	if (transp_obj)
+	{
+		if (obstacle_obj != NULL && obstacle_dist > transp_dist)
+			return (obstacle_obj);
+		else if (transp_dist < obstacle_dist)
+			return (transp_obj);
+	}
+	return (obstacle_obj);
+	// while (objs)
+	// {
+	// 	rt_intersect_ray(ray, objs, &inter, dist_range);
+	// 	if (inter.closest_obj)
+	// 	{
+	// 		if (inter.closest_obj->transparency > 0)
+	// 		{
+	// 			if (obstacle_obj)
+	// 			{
+	// 				if (inter.dist < obstacle_dist)
+	// 				{
+	// 					obstacle_obj = inter.closest_obj;
+	// 					obstacle_dist = inter.dist;
+	// 				}
+	// 			}
+	// 			obstacle_obj = inter.closest_obj;
+	// 			obstacle_dist = inter.dist;
+	// 		}
+	// 	}
+	// 	objs = objs->next;
+	// }
+	
+	// double		dist_range[2];
+	// t_intersect	inter;
+	// t_ray		ray;
+
+	// ray.origin = point;
+	// ray.direction = light;
+	// inter.dist = DBL_MAX;
+	// inter.closest_obj = NULL;
+	// dist_range[0] = 0.0001;
+	// dist_range[1] = (l.type == LT_POINT) ?
+	// vec_length(point - l.position) : DBL_MAX;
+	// while (objs)
+	// {
+	// 	rt_intersect_ray(ray, objs, &inter, dist_range);
+	// 	objs = objs->next;
+	// }
+	// return (inter.closest_obj);
 }
 
 double			rt_calc_intesity(t_lights *light, t_ray r, t_vec l,

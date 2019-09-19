@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:24:31 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 16:23:51 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 18:35:48 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		*rt_threaded_loop(void *r)
 			ray.direction = rt_canvas_to_viewport(rt->x_start, y);
 			ray.direction = rt_rotate_camera(&(rt->camera), ray.direction);
 			color = rt_trace_ray(ray, rt, dist_range, RECURTION_DEPTH);
-			color = cartoon(color);
+			// color = cartoon(color);
 			ft_pp_img(rt->pixels, rt->x_start + CW / 2, CH / 2 - y,
 				rt_channel_color_to_uint(color));
 		}

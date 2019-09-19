@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:24:36 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/19 17:43:45 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 18:25:16 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,35 @@ void				sepia_image(Uint32 *pixels, Uint32 *pixels_copy)
 	}
 }
 
-void				gray_rad(Uint32 *pixels, Uint32 *pixels_copy)
-{
-	int			i;
-	Uint32		rgb;
+// void				gray_rad(Uint32 *pixels, Uint32 *pixels_copy)
+// {
+// 	int			i;
+// 	Uint32		rgb;
 
-	i = -1;
-	while (CW * CH > (++i))
-	{
-		rgb = 0.299 * pixels[i].r + 0.587 * pixels[i].g + 0.114 * pixels[i].b;
-		pixels_copy[i] = rt_channel_color_to_uint((t_channel){rgb, rgb, rgb});
-	}
-}
+// 	i = -1;
+// 	while (CW * CH > (++i))
+// 	{
+// 		rgb = 0.299 * pixels[i].r + 0.587 * pixels[i].g + 0.114 * pixels[i].b;
+// 		pixels_copy[i] = rt_channel_color_to_uint((t_channel){rgb, rgb, rgb});
+// 	}
+// }
 
-void				white_rad(Uint32 *pixels, Uint32 *pixels_copy)
-{
-	int			i;
-	Uint32		rgb;
-	t_channel	rez;
+// void				white_rad(Uint32 *pixels, Uint32 *pixels_copy)
+// {
+// 	int			i;
+// 	Uint32		rgb;
+// 	t_channel	rez;
 
-	i = -1;
-	while (CW * CH > (++i))
-	{
-		rgb = 0.299 * pixels[i].r + 0.587 * pixels[i].g + 0.114 * pixels[i].b;
-		rez.r = (((255 - rgb) < 0) ? 0 : (255 - rgb));
-		rez.g = (((255 - rgb) < 0) ? 0 : (255 - rgb));
-		rez.b = (((255 - rgb) < 0) ? 0 : (255 - rgb));
-		pixels_copy[i] = rt_channel_color_to_uint(rez);
-	}
-}
+// 	i = -1;
+// 	while (CW * CH > (++i))
+// 	{
+// 		rgb = 0.299 * pixels[i].r + 0.587 * pixels[i].g + 0.114 * pixels[i].b;
+// 		rez.r = (((255 - rgb) < 0) ? 0 : (255 - rgb));
+// 		rez.g = (((255 - rgb) < 0) ? 0 : (255 - rgb));
+// 		rez.b = (((255 - rgb) < 0) ? 0 : (255 - rgb));
+// 		pixels_copy[i] = rt_channel_color_to_uint(rez);
+// 	}
+// }
 
 t_channel			cartoon(t_channel col)
 {

@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 16:46:21 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/19 19:28:37 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct			s_intersect
 	t_objects			*closest_obj;
 	t_vec				hit;
 	t_vec				normal;
+	t_objects			*transp_obj;
 }						t_intersect;
 
 typedef struct			s_camera
