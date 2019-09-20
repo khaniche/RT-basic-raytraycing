@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:02:05 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 17:00:07 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 13:05:06 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ bool	pr_obj_plane(const JSON_Object *j_ob, t_objects *plane)
 		!pr_transparency(j_ob, plane) ||
 		!check_reflect_transparency(plane))
 		return (false);
+	pr_negative(j_ob, plane);
 	pr_radius_pl(j_ob, plane);
 	if (vec_length(plane->orient) != 0)
 		plane->orient /= vec_length(plane->orient);

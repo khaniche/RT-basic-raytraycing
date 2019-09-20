@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 11:58:52 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/14 20:38:16 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/20 10:19:00 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ void	ft_event_(t_sdls *app)
 		app->flags.right = true;
 	else if (app->event.key.keysym.sym == SDLK_a)
 		app->flags.left = true;
+	else if (app->event.key.keysym.sym == SDLK_c)
+		app->flags.clear = true;
+	else if (app->event.key.keysym.sym == SDLK_p)
+		app->flags.sepia = true;
+	else if (app->event.key.keysym.sym == SDLK_o)
+		app->flags.white = true;
+	else if (app->event.key.keysym.sym == SDLK_i)
+		app->flags.gray = true;
+	else if (app->event.key.keysym.sym == SDLK_u)
+		app->flags.cartoon = true;
+	else if (app->event.key.keysym.sym == SDLK_y)
+		app->flags.aliasing = true;
 }
 
 void	ft_event(t_sdls *app)

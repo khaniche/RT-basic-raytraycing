@@ -4,6 +4,8 @@
 		"float.h": "c",
 		"intrin.h": "c",
 		"complex": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"locale": "c",
+		"ios": "c"
 	}
 }

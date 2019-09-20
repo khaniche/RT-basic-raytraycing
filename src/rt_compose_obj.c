@@ -1,16 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compose_obj.c                                      :+:      :+:    :+:   */
+/*   rt_compose_obj.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 16:18:52 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/17 11:15:04 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 14:02:01 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void		copy_negative(t_objects *ob, t_objects *copy)
+{
+	copy->type = ob->type;
+	copy->texture = -1;
+	copy->compose = -1;
+	copy->specular = ob->specular;
+	copy->reflection = 0;
+	copy->transparency = 1;
+	copy->centre = ob->centre;
+	copy->cut = ob->cut;
+	copy->orient = ob->orient;
+	copy->color = ob->color;
+	if (ob->radius < 2)
+		copy->radius = ob->radius / 2;
+	else
+		copy->radius = 1.5;
+	copy->k = ob->k;
+	copy->angle = ob->angle;
+}
 
 static void		copy_(t_objects *ob, t_objects *copy)
 {
@@ -75,4 +95,32 @@ void			compose_obj(t_objects **obj)
 		ob->next->next = *obj;
 		spec(obj, ob, t_ob);
 	}
+}
+
+void			neg_obj(t_objects **obj)
+{
+	t_objects	*ob;
+	t_objects	*t_ob;
+	bool		negative;
+
+	negative = false;
+	t_ob = *obj;
+	while (t_ob)
+	{
+		if (t_ob->negative == 1 && t_ob->type == OBJ_PLANE)
+		{
+			negative = true;
+			break ;
+		}
+		t_ob = t_ob->next;
+	}
+	if (negative == true)
+	{
+		ob = (t_objects *)malloc(sizeof(t_objects));
+		ob->next = NULL;
+		copy_negative(t_ob, ob);
+		ob->next = *obj;
+		*obj = ob;
+	}
+	compose_obj(obj);
 }

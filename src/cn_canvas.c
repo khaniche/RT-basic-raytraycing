@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cn_canvas.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:59:46 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/14 12:49:57 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/20 09:51:52 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	cn_create(t_canvas *cn, SDL_Renderer *r, const int w, const int h)
 	cn->w = w;
 	cn->h = h;
 	if ((cn->pixels = (Uint32 *)malloc(w * h * sizeof(Uint32))) == NULL)
+		return (-1);
+	if ((cn->pixels_copy = (Uint32 *)malloc(w * h * sizeof(Uint32))) == NULL)
 		return (-1);
 	cn->field = SDL_CreateTexture(r, SDL_PIXELFORMAT_ARGB8888,
 					SDL_TEXTUREACCESS_STATIC, w, h);
@@ -46,6 +48,8 @@ void		cn_destroy_canvas(t_canvas *canvas)
 		return ;
 	if (canvas->pixels)
 		free(canvas->pixels);
+	if (canvas->pixels_copy)
+		free(canvas->pixels_copy);
 	SDL_DestroyTexture(canvas->field);
 	wn_destroy(&(canvas->wn));
 }

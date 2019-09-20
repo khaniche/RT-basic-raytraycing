@@ -6,7 +6,7 @@
 #    By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 19:28:21 by mhonchar          #+#    #+#              #
-#    Updated: 2019/09/19 17:12:26 by dmolyboh         ###   ########.fr        #
+#    Updated: 2019/09/20 15:23:18 by dmolyboh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC_FILES =		cn_mainloop.c\
 				sdl_clean.c\
 				anti_aliasing.c\
 				color_disruptions.c\
+				color_disruptions_.c\
 				main.c\
 				pr_fields3.c\
 				rt_clean.c\
@@ -61,7 +62,8 @@ SRC_FILES =		cn_mainloop.c\
 				rt_figure_defenetion.c\
 				rt_parse.c\
 				rt_threader.c\
-				rt_visual_effects.c
+				rt_visual_effects.c\
+				rt_shadows.c
 				
 HEADERS = 		$(INC_DIR)canvas.h \
 				$(INC_DIR)error_handler.h \

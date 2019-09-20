@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 19:28:37 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 15:25:53 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define DEG_TO_RAD(angle) (M_PI * (angle)) / 180
 # define ROT_POWER DEG_TO_RAD(1);
 # define TEXTURES_COUNT 7
+# define DISRUPT 6
 
 typedef double			t_vec __attribute__((__ext_vector_type__(3)));
 
@@ -70,6 +71,7 @@ typedef struct			s_objects
 	int					type;
 	int					texture;
 	int					compose;
+	int					negative;
 	double				specular;
 	double				reflection;
 	double				transparency;
@@ -122,6 +124,12 @@ typedef struct			s_flags
 	bool				right;
 	bool				left;
 	bool				lmb_down;
+	bool				sepia;
+	bool				white;
+	bool				gray;
+	bool				clear;
+	bool				cartoon;
+	bool				aliasing;
 }						t_flags;
 
 typedef struct			s_sdls
@@ -138,6 +146,17 @@ typedef struct			s_color_trace
 	t_channel			reflected_color;
 	t_channel			transparency_color;
 }						t_color_trace;
+
+typedef struct			s_shadow_st
+{
+	double				dist_range[2];
+	t_intersect			inter;
+	t_ray				ray;
+	t_objects			*obstacle_obj;
+	double				obstacle_dist;
+	t_objects			*transp_obj;
+	double				transp_dist;
+}						t_sh;
 
 void					ft_sdl_init(t_sdls *app);
 void					ft_sdl_clean(t_sdls *app);
@@ -210,6 +229,7 @@ bool					pr_cut(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_texture(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_compose(const JSON_Object *j_ob, t_objects *obj);
 bool					pr_radius_pl(const JSON_Object *j_ob, t_objects *obj);
+bool					pr_negative(const JSON_Object *j_ob, t_objects *obj);
 bool					check_reflect_transparency(t_objects *obj);
 void					check_light(t_lights **lg);
 
@@ -233,7 +253,7 @@ bool					rt_find_closest_obj(t_ray ray, t_objects *objs,
 t_vec					normalize(t_vec vec);
 
 t_channel				noise_text(t_vec p, t_vec center);
-t_channel				wave_chechboard(t_vec p, t_vec center);
+t_channel				wave_chechboard(t_vec p);
 void					sepia_image(Uint32 *pixels, Uint32 *pixels_copy);
 void					save_image(const char *file_name,
 							SDL_Renderer *renderer);
@@ -243,5 +263,12 @@ double					deg_to_rad(double angle);
 t_channel				disruption_1(t_vec p, t_vec center);
 t_channel				disruption_2(t_vec p, t_vec center);
 t_channel				disruption_3(t_vec p, t_vec center);
-t_channel				cartoon(t_channel col);
+t_channel				disruption_4(t_vec p, t_vec center);
+void					cartoon(Uint32 *pixels, Uint32 *pixels_copy);
+void					gray_rad(Uint32 *pixels, Uint32 *pixels_copy);
+void					white_rad(Uint32 *pixels, Uint32 *pixels_copy);
+void					neg_obj(t_objects **obj);
+t_objects				*rt_point_in_shadow(t_objects *objs, t_vec point,
+							t_vec light, t_lights l);
+
 #endif

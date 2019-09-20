@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 15:21:23 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/19 17:14:25 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 15:21:47 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,11 @@ t_vec		rt_reflect_ray(t_vec normal, t_vec ray_dir)
 
 t_vec		normalize(t_vec vec)
 {
-	return ((1.0 / vec_length(vec)) * vec);
+	double	length;
+
+	length = vec_length(vec);
+	if (length == 0)
+		return (0);
+	else
+		return (vec / length);
 }

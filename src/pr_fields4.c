@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 10:41:47 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/19 16:57:59 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 13:48:33 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,16 @@ bool	pr_radius_pl(const JSON_Object *j_ob, t_objects *obj)
 	if (!json_object_has_value_of_type(j_ob, "radius", JSONNumber))
 		obj->radius = -1;
 	obj->radius = json_object_get_number(j_ob, "radius");
+	return (true);
+}
+
+bool	pr_negative(const JSON_Object *j_ob, t_objects *obj)
+{
+	if (!json_object_has_value_of_type(j_ob, "negative", JSONNumber))
+	{
+		obj->negative = -1;
+		return (true);
+	}
+	obj->negative = 1;
 	return (true);
 }

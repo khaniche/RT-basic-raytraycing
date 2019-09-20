@@ -6,7 +6,7 @@
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:46:34 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/17 12:00:58 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 15:35:14 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ bool	rt_parse_file_(t_rt *rt, JSON_Object *json_objs)
 		return (false_error("Error while getting array of lights"));
 	if (!parse_array_of_lights(json_arr, &(rt->lights)))
 		return (false_error("Error while parsing lights"));
+	if (!(pr_camera(json_objs, &(rt->camera))))
+		return (false_error("Error while parsing camera"));
 	json_array_clear(json_arr);
 	return (true);
 }
@@ -120,9 +122,12 @@ bool	rt_parse_file(t_rt *rt, const char *fname)
 	if ((json_objs = json_value_get_object(json_val)) == NULL)
 		return (false_error("Error while getting object from value"));
 	if (!rt_parse_file_(rt, json_objs))
+	{
+		json_object_clear(json_objs);
+		json_value_free(json_val);
+		rt_clean(rt);
 		return (false);
-	if (!(pr_camera(json_objs, &(rt->camera))))
-		return (false_error("Error while parsing camera"));
+	}
 	ft_putendl("All good so far");
 	json_object_clear(json_objs);
 	json_value_free(json_val);

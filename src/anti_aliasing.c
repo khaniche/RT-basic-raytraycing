@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_.c                                           :+:      :+:    :+:   */
+/*   anti_aliasing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 10:40:08 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/18 10:41:01 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 10:25:29 by dmolyboh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void				anti_aliasing(Uint32 *pixels, int intensive)
 			tmp.g = (y + 1) * CW;
 			tmp.b = (y - 1) * CW;
 			x = 0;
-			while (++x < CW)
+			while (++x < CW - 2)
 			{
 				rgb = anti_aliasing_(pixels, tmp, x);
 				pixels[x + tmp.r] = rt_channel_color_to_uint(rgb);
