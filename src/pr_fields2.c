@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_fields2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaniche <khaniche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 12:16:14 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/15 14:20:35 by khaniche         ###   ########.fr       */
+/*   Updated: 2019/09/20 16:33:46 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ bool	pr_angle(const JSON_Object *j_ob, t_objects *obj)
 	obj->angle = json_object_get_number(j_ob, "angle");
 	if ((obj->angle < 1) || (obj->angle > 90))
 		return (false);
-	obj->radius = DEG_TO_RAD(obj->angle);
+	obj->radius = deg_to_rad(obj->angle);
 	return (true);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_visual_effects.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:24:36 by dmolyboh          #+#    #+#             */
-/*   Updated: 2019/09/20 14:03:27 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 16:21:59 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sepia_image(Uint32 *pixels, Uint32 *pixels_copy)
 		((tmp & 0xFF) * 0.168);
 		rgb.b = (((tmp >> 16) & 0xFF) * 0.272) + ((tmp >> 8 & 0xFF) * 0.534) +
 		((tmp & 0xFF) * 0.131);
-		pixels_copy[i] = rt_channel_color_to_uint(rgb);
+		pixels_copy[i] = rt_channel_color_to_uint(rt_enlightenment(rgb, 1));
 	}
 }
 

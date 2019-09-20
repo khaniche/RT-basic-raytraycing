@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/19 17:22:55 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/20 15:34:21 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 16:43:53 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_mainloop(t_sdls *app)
 {
 	t_rt	rt;
 
-	if (!rt_parse_file(&rt, "scene.json") || !load_textures(&rt))
+	if (!rt_parse_file(&rt, app->fname) || !load_textures(&rt))
 		return ;
 	check_light(&rt.lights);
 	neg_obj(&rt.objs);

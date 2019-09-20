@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:46:34 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/20 15:35:14 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 16:34:00 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ bool	pr_camera(const JSON_Object *j_ob, t_camera *camera)
 		if (!pr_vec_field(j_cam, "origin", &(camera->origin)))
 			return (false);
 	}
-	camera->orient[0] = DEG_TO_RAD(camera->orient[0]);
-	camera->orient[1] = DEG_TO_RAD(camera->orient[1]);
-	camera->orient[2] = DEG_TO_RAD(camera->orient[2]);
+	camera->orient[0] = deg_to_rad(camera->orient[0]);
+	camera->orient[1] = deg_to_rad(camera->orient[1]);
+	camera->orient[2] = deg_to_rad(camera->orient[2]);
 	return (true);
 }
 

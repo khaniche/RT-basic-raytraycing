@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:23:19 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/20 15:25:53 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 16:38:28 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@
 # define VIEWPORT_HEIGHT 1
 # define DIST_CAM_PP 1
 # define RECURTION_DEPTH 9
-# define DEG_TO_RAD(angle) (M_PI * (angle)) / 180
-# define ROT_POWER DEG_TO_RAD(1);
+# define ROT_POWER 0.0872664626;
 # define TEXTURES_COUNT 7
 # define DISRUPT 6
 
@@ -137,6 +136,7 @@ typedef struct			s_sdls
 	t_canvas			canvas;
 	t_flags				flags;
 	SDL_Event			event;
+	const char			*fname;
 }						t_sdls;
 
 typedef struct			s_color_trace
