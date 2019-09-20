@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cn_canvas.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 16:59:46 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/20 09:51:52 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 17:15:40 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	cn_create(t_canvas *cn, SDL_Renderer *r, const int w, const int h)
 
 void		cn_create_canvas(t_canvas *cn)
 {
-	wn_init(&(cn->wn), "GUImp", (SDL_Rect) {SDL_WINDOWPOS_CENTERED,
+	wn_init(&(cn->wn), "RT", (SDL_Rect) {SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, CN_WIDTH, CN_HEIGHT},
 		SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	if (cn_create(cn, cn->wn.renderer, CN_WIDTH, CN_HEIGHT) < 0)

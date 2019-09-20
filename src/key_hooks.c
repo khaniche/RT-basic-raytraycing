@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 11:58:52 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/20 10:19:00 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 17:03:39 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	ft_event(t_sdls *app)
 		if (SDL_KEYDOWN == app->event.type)
 		{
 			if (app->event.key.keysym.sym == SDLK_UP)
-				app->flags.rot_x = true;
-			if (app->event.key.keysym.sym == SDLK_LEFT)
 				app->flags.rot_y = true;
-			if (app->event.key.keysym.sym == SDLK_RIGHT)
+			if (app->event.key.keysym.sym == SDLK_LEFT)
 				app->flags.rot_x_min = true;
+			if (app->event.key.keysym.sym == SDLK_RIGHT)
+				app->flags.rot_x = true;
 			if (app->event.key.keysym.sym == SDLK_DOWN)
 				app->flags.rot_y_min = true;
 			ft_event_(app);

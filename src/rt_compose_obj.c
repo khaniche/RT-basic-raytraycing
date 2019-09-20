@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_compose_obj.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 16:18:52 by khaniche          #+#    #+#             */
-/*   Updated: 2019/09/20 14:02:01 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 17:39:29 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		copy_negative(t_objects *ob, t_objects *copy)
 	copy->cut = ob->cut;
 	copy->orient = ob->orient;
 	copy->color = ob->color;
-	if (ob->radius < 2)
+	if (ob->radius > 2)
 		copy->radius = ob->radius / 2;
 	else
 		copy->radius = 1.5;
