@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tx_texture.c                                       :+:      :+:    :+:   */
+/*   rt_tx_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmolyboh <dmolyboh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 15:42:03 by dshereme          #+#    #+#             */
-/*   Updated: 2019/09/17 11:41:56 by dmolyboh         ###   ########.fr       */
+/*   Updated: 2019/09/20 18:01:00 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,18 @@ static bool			load_texture(t_rt *rtv, char *text_path)
 	static	int			texture_numb;
 
 	rtv->texture[texture_numb] = SDL_LoadBMP(text_path);
-	if (rtv->texture[texture_numb++] == NULL)
+	if (rtv->texture[texture_numb] == NULL)
+	{
+		while (texture_numb >= 0)
+		{
+			SDL_FreeSurface(rtv->texture[texture_numb]);
+			rtv->texture[texture_numb] = NULL;
+			texture_numb--;
+		}
+		rt_clean(rtv);
 		return (false);
+	}
+	texture_numb++;
 	return (true);
 }
 
