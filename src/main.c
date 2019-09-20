@@ -6,7 +6,7 @@
 /*   By: mhonchar <mhonchar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 17:36:52 by mhonchar          #+#    #+#             */
-/*   Updated: 2019/09/20 17:39:48 by mhonchar         ###   ########.fr       */
+/*   Updated: 2019/09/20 17:45:13 by mhonchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ int		main(int argc, char **argv)
 		ft_mainloop(&app);
 		ft_sdl_clean(&app);
 	}
-	system("leaks -q RTv1");
 	return (0);
 }
